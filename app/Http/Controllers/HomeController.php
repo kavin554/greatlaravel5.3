@@ -37,9 +37,9 @@ class HomeController extends Controller
     {
         return view('pages.generalsetup.country');
     }
-    public function embassycontact()
+    public function embassy()
     {
-        return view('pages.generalsetup.embassy_contact');
+        return view('pages.generalsetup.embassy');
     }
     public function placetype()
     {
@@ -75,13 +75,17 @@ class HomeController extends Controller
     {
         return view('pages.transaction.registration');
     }
+    public function disperse()
+    {
+        return view('pages.transaction.disperse');
+    }
     public function weather()
     {
         return view('pages.transaction.weather');
     }
-    public function disperse()
+    public function weather_synopsis()
     {
-        return view('pages.transaction.disperse');
+        return view('pages.transaction.weather_synopsis');
     }
 
 

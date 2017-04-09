@@ -14,24 +14,21 @@ class CreateUserRegistrationTable extends Migration
     public function up()
     {
         Schema::create('user_registration', function (Blueprint $table) {
-            $table->increments('user_id');
-            $table->string('user_name');
-            $table->string('email_1');
-            $table->string('email_2');
-            $table->string('emergency_contact_1');
-            $table->string('emergency_contact_2');
-            $table->string('emergency_contact_3');
-            $table->string('nationality');
-            $table->string('address_1');
-            $table->string('address_2');
-            $table->string('passport_no');
-            $table->string('visa_issue_date');
-            $table->string('visa_expiry_date');
-            $table->string('remarks');
-            $table->string('created_by');
-            $table->string('created_date');
-            $table->string('modified_by');
-            $table->string('modified_date');
+            $table->increments('id')->nullable();
+            $table->string('user_name')->nullable();
+            $table->string('country_name')->nullable();
+            $table->string('street')->nullable();
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
+            $table->integer('mobile_no')->nullable();
+            $table->integer('home_no')->nullable();
+            $table->string('email_1')->nullable();
+            $table->string('email_2')->nullable();
+            $table->float('passport_no')->nullable();
+            $table->date('issue_date')->nullable();
+            $table->string('type')->nullable();
+            $table->date('expiry_date')->nullable();
+            $table->string('remarks')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

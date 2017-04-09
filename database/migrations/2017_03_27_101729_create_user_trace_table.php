@@ -14,17 +14,20 @@ class CreateUserTraceTable extends Migration
     public function up()
     {
         Schema::create('user_trace', function (Blueprint $table) {
-            $table->increments('trace_id');
-            $table->string('user_id');
-            $table->string('route');
-            $table->string('place_name');
-            $table->string('time_stamps');
-            $table->string('date');
-            $table->string('latitude');
-            $table->string('longitude');
-            $table->string('altitude');
-            $table->string('sl_desc');
-            $table->string('remarks');
+            $table->increments('id');
+            $table->integer('user_id')-> unsigned();
+            $table->foreign('user_id')-> references('id')-> on ('user_registration');
+            $table->integer('sr_id')-> unsigned();
+            $table->foreign('sr_id')-> references('id')-> on ('setup_route');
+            $table->string('route')->nullable();
+            $table->string('place_name')->nullable();
+            $table->time('time_stamps')->nullable();
+            $table->date('date')->nullable();
+            $table->integer('latitude')->nullable();
+            $table->integer('longitude')->nullable();
+            $table->integer('altitude')->nullable();
+            $table->string('sl_desc')->nullable();
+            $table->string('remarks')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

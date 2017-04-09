@@ -15,12 +15,13 @@ class CreateEmbassyTable extends Migration
     {
         Schema::create('embassy', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('country_tel_code');
-            $table->string('location');
-            $table->string('contact_person');
-            $table->string('position');
-            $table->string('mobile_no');
-            $table->string('remarks');
+            $table->integer('country_id')-> unsigned();
+            $table->foreign('country_id')-> references('id')-> on ('country');
+            $table->string('location')->nullable();
+            $table->integer('contact_person')->nullable();
+            $table->string('position')->nullable();
+            $table->integer('mobile_no')->nullable();
+            $table->string('remarks')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

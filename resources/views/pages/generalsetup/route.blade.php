@@ -5,7 +5,7 @@
 <div class="container-fluid">
     <div class="row">
 
-        <div class="col-md-9">
+        <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-body">
 
@@ -17,10 +17,9 @@
                                                                       data-toggle="tab"> Route Detail Form </a></li>
                             <li role="presentation"><a href="#list" aria-controls="home" role="tab"
                                                        data-toggle="tab"> Route Detail List </a></li>
-                            <li role="presentation"><a href="#maker" aria-controls="home" role="tab"
-                                                       data-toggle="tab">Route Maker</a></li>
+
                             <li role="presentation"><a href="#itetaries" aria-controls="home" role="tab"
-                                                       data-toggle="tab"> Route Itetaries</a></li>
+                                                       data-toggle="tab"> Route Iteneraries</a></li>
                             <li role="presentation"><a href="#stops" aria-controls="home" role="tab"
                                                        data-toggle="tab"> Stops Setup</a></li>
 
@@ -31,6 +30,8 @@
                                 <div class="container" style="padding:5px;width:100%">
 
                                     <div class="table-responsive">
+                                        <form action="{{ route ('routes.store') }} " method="POST">
+                                            {{ csrf_field() }}
                                         <table width="98%">
 
                                             <tr height="40">
@@ -43,13 +44,13 @@
                                                     <table width="100%">
                                                         <tr>
                                                             <td width="30%">
-                                                                <input class="form-control" type="hidden">
+                                                                <input class="form-control" name="region" type="hidden">
 
 
                                                             <td align="right">&nbsp;</td>
                                                             <td align="right">Region</td>
                                                             <td align="center">:</td>
-                                                            <td width="55%"><SELECT name="STATUS"
+                                                            <td width="55%"><SELECT name="region"
                                                                                     class="form-control">
                                                                     <OPTION VALUE="">Far Western Development
                                                                         Region
@@ -87,51 +88,10 @@
                                                 </td>
                                                 <td align="center">:</td>
                                                 <td><input type="text" class="form-control" id="NAME"
-                                                           name="NAME" value=""
+                                                           name="name" value=""
                                                            placeholder="Enter Name "
                                                            required ></td>
                                             </tr>
-
-
-                                            <tr height="40">
-                                                <td width="28%" align="right">Code</td>
-                                                <td width="02%" align="center">:</td>
-                                                <td width="88%">
-                                                    <table width="100%">
-                                                        <tr>
-                                                            <td width="30%">
-                                                                <div class="input-append date">
-                                                                    <input name="CODE" class="form-control"
-                                                                           placeholder="Code" id="CODE">
-                                                                </div>
-                                                            </td>
-                                                            <td width="02%">&nbsp;</td>
-                                                            <td align="right">Region</td>
-                                                            <td align="center">:</td>
-                                                            <td width="55%"><SELECT name="STATUS"
-                                                                                    class="form-control">
-                                                                    <OPTION VALUE="">Far Western Development
-                                                                        Region
-                                                                    </OPTION>
-                                                                    <OPTION VALUE="">Mid Western Development
-                                                                        Region
-                                                                    </OPTION>
-                                                                    <OPTION VALUE="">Western Development
-                                                                        Region
-                                                                    </OPTION>
-                                                                    <OPTION VALUE="">Central Development
-                                                                        Region
-                                                                    </OPTION>
-                                                                    <OPTION VALUE="">Eastern Development
-                                                                        Region
-                                                                    </OPTION>
-                                                                    OPTION>
-                                                                </SELECT></td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-
 
                                             <tr height="40">
                                                 <td align="right">Level</td>
@@ -141,7 +101,7 @@
                                                         <tr>
                                                             <td width="40%">
                                                                 <div class="input-append date">
-                                                                    <SELECT name="STATUS" class="form-control">
+                                                                    <SELECT name="level" class="form-control">
                                                                         <OPTION VALUE="">Level 1</OPTION>
                                                                         <OPTION VALUE="P">Level 2</OPTION>
                                                                         <OPTION VALUE="A">Level 3</OPTION>
@@ -151,13 +111,21 @@
                                                             <td width="02%">&nbsp;</td>
                                                             <td align="right">No of Days</td>
                                                             <td width="02%" align="center">:</td>
-                                                            <td width="20%"><input name="NO_DAYS"
+                                                            <td width="20%"><input name="noDays"
                                                                                    class="form-control"
                                                                                    placeholder="No of Days "
-                                                                                   id="NO_DAYS"></td>
+                                                                                   id="no_days"></td>
                                                         </tr>
                                                     </table>
                                                 </td>
+                                            </tr>
+
+                                            <tr height="40">
+                                                <td width="28%" align="right">Season</td>
+                                                <td width="02%" align="center">:</td>
+                                                <td><input type="text" class="form-control" id="SEASON"
+                                                           name="season" value="" placeholder="Season"
+                                                           value="" required></td>
                                             </tr>
 
                                             <tr height="40">
@@ -166,7 +134,7 @@
                                                 <td width="88%">
                                                     <table width="100%">
                                                         <tr>
-                                                            <td width="25%"><input name="TOTAL_DISTANCE"
+                                                            <td width="25%"><input name="total_distance"
                                                                                    class="form-control"
                                                                                    placeholder="Total Distance"
                                                                                    id="TOTAL_DISTANCE"></td>
@@ -174,12 +142,12 @@
                                                             <td align="right">Highest Point</td>
                                                             <td width="02%" align="center">:</td>
                                                             <td width="02%" align="center">&nbsp;</td>
-                                                            <td width="30%"><input name="HIGHEST_POINT"
+                                                            <td width="30%"><input name="highest_point"
                                                                                    class="form-control"
                                                                                    placeholder="Highest Point "
                                                                                    id="HIGHEST_POINT"></td>
                                                             <td width="02%">&nbsp;</td>
-                                                            <td width="20%"><SELECT name="STATUS"
+                                                            <td width="20%"><SELECT name="unit"
                                                                                     class="form-control">
                                                                     <OPTION VALUE="">Feet</OPTION>
                                                                     <OPTION VALUE="P">Meter</OPTION>
@@ -204,7 +172,7 @@
                                                         <tr>
                                                             <td width="30%">
 
-                                                                <input name="LAT" class="form-control"
+                                                                <input name="start_latitude" class="form-control"
                                                                        placeholder="latitude " id="LAT">
 
                                                             </td>
@@ -214,7 +182,7 @@
                                                             <td width="02%">&nbsp;</td>
                                                             <td width="30%">
 
-                                                                <input name="LON" class="form-control"
+                                                                <input name="start_longitude" class="form-control"
                                                                        placeholder="Longitude " id="LON">
 
                                                             </td>
@@ -224,7 +192,7 @@
                                                             <td width="02%">&nbsp;</td>
                                                             <td width="30%">
 
-                                                                <input name="ALT" class="form-control"
+                                                                <input name="start_altitude" class="form-control"
                                                                        placeholder="Altitude " id="ALT">
 
                                                             </td>
@@ -247,7 +215,7 @@
                                                         <tr>
                                                             <td width="30%">
 
-                                                                <input name="LAT" class="form-control"
+                                                                <input name="end_latitude" class="form-control"
                                                                        placeholder="latitude " id="LAT">
 
                                                             </td>
@@ -257,7 +225,7 @@
                                                             <td width="02%">&nbsp;</td>
                                                             <td width="30%">
 
-                                                                <input name="LON" class="form-control"
+                                                                <input name="end_longitude" class="form-control"
                                                                        placeholder="Longitude " id="LON">
 
                                                             </td>
@@ -267,7 +235,7 @@
                                                             <td width="02%">&nbsp;</td>
                                                             <td width="30%">
 
-                                                                <input name="ALT" class="form-control"
+                                                                <input name="end_altitude" class="form-control"
                                                                        placeholder="Altitude " id="ALT">
 
                                                             </td>
@@ -280,7 +248,7 @@
                                                 <td width="28%" align="right">Speciality</td>
                                                 <td width="02%" align="center">:</td>
                                                 <td><input type="text" class="form-control" id="SPECIALITY"
-                                                           name="SPECIALITY" value="" placeholder="Speciality"
+                                                           name="speciality" value="" placeholder="Speciality"
                                                            value="" required></td>
                                             </tr>
 
@@ -288,7 +256,7 @@
                                                 <td width="28%" align="right">Resources</td>
                                                 <td width="02%" align="center">:</td>
                                                 <td><input type="text" class="form-control" id="RESOURCES"
-                                                           name="RESOURCES" value="" placeholder="Resources"
+                                                           name="resources" value="" placeholder="Resources"
                                                            value="" required></td>
                                             </tr>
 
@@ -298,7 +266,7 @@
                                                 <td align="center" valign="top">:</td>
                                                 <td><textarea class="form-control" rows="1" id="REMARKS"
                                                               placeholder="Enter Remarks"
-                                                              name="REMARKS">
+                                                              name="remarks">
                                                         </textarea></td>
                                             </tr>
 
@@ -310,34 +278,7 @@
 
                                                     <table class="table">
                                                         <tr>
-                                                            <td width="50%">
-
-
-                                                                <input type="hidden" name="operation"
-                                                                       value="submit">
-                                                                <button type="submit"
-                                                                        class="btn btn-success">
-                                                                    <b>Submit</b>
-                                                                </button>
-                                                                </form>
-
-                                                            </td>
-
-
-
-
-
-                                                            <td width="25%" align="left">
-
-                                                                <form role="form" method="post"
-                                                                      action="general_setup.php">
-                                                                    <button type="submit" class="btn btn-default">
-                                                                        Cancel
-                                                                    </button>
-                                                                </form>
-
-
-                                                            </td>
+                                                            <input type="submit" value="Save" class="btn btn-primary pull-right">
 
                                                         </tr>
                                                     </table>
@@ -347,106 +288,14 @@
                                             </tr>
 
                                         </table>
+                                        </form>
 
 
                                     </div>
                                 </div>
                             </div>
 
-                            <div role="tabpanel" class="tab-pane" id="maker">
-                                <div class="container" style="padding:5px;width:100%">
-                                    <div class="panel panel-default">
-                                    </div>
 
-                                    <div class="list-group">
-                                        <div class="panel panel-default">
-                                            <div class="panel-body">
-
-                                                <div class="list-group">
-                                                    <table width="100%" class="table table-striped" border="0">
-                                                        <thead>
-
-                                                        <tr>
-                                                            <th>Route</th>
-                                                            <th>Date</th>
-                                                            <th>Time</th>
-                                                            <th>Place</th>
-                                                            <th>Country</th>
-                                                            <th>&nbsp;</th>
-                                                            <th>&nbsp;</th>
-                                                        </tr>
-
-                                                        <tr>
-                                                            <td width="30%">
-                                                                <SELECT name="STATUS" class="form-control">
-                                                                    <OPTION VALUE="">Kathmandu to Pokhara</OPTION>
-                                                                    <OPTION VALUE="P">Beni to Tatopani</OPTION>
-                                                                    <OPTION VALUE="A">Jomsom to Muktinath</OPTION>
-                                                                </SELECT>
-                                                            </td>
-                                                            <td>
-                                                                <input name="DATE" class="form-control" placeholder="Date"
-                                                                       id="dp_date">
-                                                            </td>
-                                                            <td>
-                                                                <input name="TIME" class="form-control" placeholder="Time"
-                                                                       id="dp_time">
-
-                                                            </td>
-                                                            <td width="20%">
-                                                                <SELECT name="STATUS" class="form-control">
-                                                                    <OPTION VALUE="">Kathmandu</OPTION>
-                                                                    <OPTION VALUE="P">Pokhara</OPTION>
-                                                                    <OPTION VALUE="A">Jomsom</OPTION>
-                                                                    <OPTION VALUE="A">Bara</OPTION>
-                                                                    <OPTION VALUE="A">Muktinath</OPTION>
-                                                                    <OPTION VALUE="A">Chitwan</OPTION>
-                                                                    <OPTION VALUE="A">Putan</OPTION>
-                                                                </SELECT>
-                                                            </td>
-                                                            <td width="15%">
-                                                                <SELECT name="STATUS" class="form-control">
-                                                                    <OPTION VALUE="">Nepal</OPTION>
-                                                                    <OPTION VALUE="P">Pakistan</OPTION>
-                                                                    <OPTION VALUE="A">Srilanka</OPTION>
-                                                                </SELECT>
-
-                                                            </td>
-                                                            <td>
-                                                                <button type="submit" class="btn btn-success">Submit</button>
-                                                            </td>
-                                                        </tr>
-
-                                                        </thead>
-                                                        <tbody>
-
-                                                        <tr>
-                                                            <td>Kathmandu to Pokhara</td>
-                                                            <td>2016-06-12</td>
-                                                            <td>6:40</td>
-                                                            <td>Pokhara</td>
-                                                            <td>Nepal</td>
-
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Beni to Tatopani</td>
-                                                            <td>2016-03-19</td>
-                                                            <td>5:30</td>
-                                                            <td>Beni</td>
-                                                            <td>Nepal</td>
-
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                </div>
-                            </div>
 
                             <div role="tabpanel" class="tab-pane" id="itetaries">
                                 <div class="container" style="padding:5px;width:100%">
@@ -456,6 +305,8 @@
                                         <div class="panel-body">
                                             <div class="list-group">
                                                 <div class="list-group">
+                                                    <form method="post" action="{{ route('iteneraries.store') }}">
+                                                        {{ csrf_field() }}
                                                     <table width="100%" class="table table-striped" border="0">
 
                                                         <thead>
@@ -464,71 +315,80 @@
                                                             <th>Start</th>
                                                             <th>End</th>
                                                             <th>Duration</th>
+                                                            <th>Description</th>
                                                             <th>Remarks</th>
-                                                            <th>Highest Alt</th>
-                                                            <th>&nbsp;</th>
-                                                            <th>&nbsp;</th>
+                                                            <th>Action</th>
+
 
                                                         </tr>
 
                                                         <tr>
                                                             <td width="5%">
-                                                                3
+                                                                <input name="day" class="form-control"
+                                                                       placeholder="Day"
+                                                                       id="day">
                                                             </td>
                                                             <td width="15%">
-                                                                <input name="START_DATE" class="form-control"
+                                                                <input name="start_date" class="form-control"
                                                                        placeholder="Start"
-                                                                       id="dp_date">
+                                                                       id="start">
                                                             </td>
                                                             <td width="15%">
-                                                                <input name="END_DATE" class="form-control" placeholder="End"
-                                                                       id="dp_time">
+                                                                <input name="end_date" class="form-control" placeholder="End"
+                                                                       id="end_date">
 
                                                             </td>
                                                             <td width="15%">
-                                                                <input name="DURATION" class="form-control"
+                                                                <input name="duration" class="form-control"
                                                                        placeholder="Duration"
                                                                        id="DURATION">
 
                                                             </td>
                                                             <td width="20%">
-                                                                <input name="REMARKS" class="form-control" placeholder="Remarks"
-                                                                       id="REMARKS">
+                                                                <input name="desc" class="form-control" placeholder="Description"
+                                                                       id="Description">
                                                             </td>
                                                             <td width="15%">
-                                                                <input name="HIGHEST_ALT" class="form-control"
-                                                                       placeholder="Highest Alt" id="HIGHEST_ALT">
-
-                                                            </td width="10%">
-                                                            <td>
-                                                                <button type="submit" class="btn btn-success">Submit</button>
+                                                                <input name="remarks" class="form-control"
+                                                                       placeholder="Remarks" id="Remarks">
                                                             </td>
+
+                                                            <td width="10%">
+                                                                <input type="submit" value="save" class="btn btn-success">
+                                                            </td>
+
 
 
                                                         </tr>
                                                         </thead>
                                                         <tbody>
+                                                        <?php foreach($routeiteneraries as $route_itineraries) {?>
                                                         <tr>
-                                                            <td>01</td>
-                                                            <td>2016-06-12</td>
-                                                            <td>2016-03-19</td>
-                                                            <td>6:40</td>
-                                                            <td>Pokhara</td>
-                                                            <td>343</td>
+                                                            <td><?php echo $route_itineraries->day  ?></td>
+                                                            <td><?php echo $route_itineraries->start  ?></td>
+                                                            <td><?php echo $route_itineraries->end  ?></td>
+                                                            <td><?php echo $route_itineraries->duration_hour ?></td>
+                                                            <td><?php echo $route_itineraries->desc  ?></td>
+                                                            <td><?php echo $route_itineraries->remarks  ?></td>
+                                                            <td>
+                                                                <form class="" method="POST"
+                                                                      action="{{ route('iteneraries.destroy', $route_iteneraries->id) }}">
+                                                                    <input type="hidden" name="_token"
+                                                                           value="{{csrf_token()}}">
+                                                                    <input type="hidden" name="_method" value="delete"/>
+                                                                    <a href="{{route('iteneraries.edit', $route_iteneraries->id)}}"
+                                                                       class="btn btn-primary">Edit</a>
+                                                                    <input type="submit" class="btn btn-danger"
+                                                                           onclick="return confirm('Confirm to Delete');"
+                                                                           name="name " value="Delete">
+                                                                </form>
+                                                            </td>
 
                                                         </tr>
-                                                        <tr>
-                                                            <td>02</td>
-                                                            <td>2016-03-19</td>
-                                                            <td>2016-06-12</td>
-                                                            <td>5:30</td>
-                                                            <td>Beni</td>
-                                                            <td>433</td>
-
-                                                        </tr>
+                                                        <?php } ?>
                                                         </tbody>
                                                     </table>
-
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -551,80 +411,88 @@
                                             <div class="panel-body">
                                                 <div class="list-group">
                                                     <div class="list-group">
+                                                        <form method="post" action="{{ route('stops.store') }}">
+                                                            {{ csrf_field() }}
                                                         <table width="100%" class="table table-striped" border="0">
 
                                                             <thead>
                                                             <tr>
                                                                 <th>Day</th>
-                                                                <th>Start</th>
-                                                                <th>End</th>
-                                                                <th>Duration</th>
+                                                                <th>No of Stops</th>
+                                                                <th>Latitude</th>
+                                                                <th>Longitude</th>
+                                                                <th>Altitude</th>
                                                                 <th>Remarks</th>
-                                                                <th>Highest Alt</th>
-                                                                <th>&nbsp;</th>
+                                                                <th>Action&nbsp;</th>
                                                                 <th>&nbsp;</th>
 
                                                             </tr>
 
                                                             <tr>
                                                                 <td width="5%">
-                                                                    3
+                                                                    <input name="days" class="form-control"
+                                                                           placeholder="No of days" id="dp_date">
                                                                 </td>
                                                                 <td width="15%">
-                                                                    <input name="START_DATE" class="form-control"
-                                                                           placeholder="Start" id="dp_date">
+                                                                    <input name="stops" class="form-control"
+                                                                           placeholder="No. of stops" id="stops">
                                                                 </td>
                                                                 <td width="15%">
-                                                                    <input name="END_DATE" class="form-control"
-                                                                           placeholder="End"
-                                                                           id="dp_time">
+                                                                    <input name="latitude" class="form-control"
+                                                                           placeholder="latitude"
+                                                                           id="latitude">
 
                                                                 </td>
                                                                 <td width="15%">
-                                                                    <input name="DURATION" class="form-control"
-                                                                           placeholder="Duration" id="DURATION">
+                                                                    <input name="longitude" class="form-control"
+                                                                           placeholder="Longitude" id="longitude">
 
                                                                 </td>
                                                                 <td width="20%">
-                                                                    <input name="REMARKS" class="form-control"
-                                                                           placeholder="Remarks"
-                                                                           id="REMARKS">
+                                                                    <input name="altitude" class="form-control"
+                                                                           placeholder="Altitude"
+                                                                           id="altitude">
                                                                 </td>
                                                                 <td width="15%">
-                                                                    <input name="HIGHEST_ALT" class="form-control"
-                                                                           placeholder="Highest Alt" id="HIGHEST_ALT">
+                                                                    <input name="remarks" class="form-control"
+                                                                           placeholder="Remarks" id="remarks">
+                                                                </td>
 
-                                                                </td width="10%">
-                                                                <td>
-                                                                    <button type="submit" class="btn btn-success">Submit
-                                                                    </button>
+                                                                <td width="10%">
+                                                                    <input type="submit" value="save" class="btn btn-success">                                                               </input>
                                                                 </td>
 
 
                                                             </tr>
                                                             </thead>
                                                             <tbody>
-                                                            <tr>
-                                                                <td>01</td>
-                                                                <td>2016-06-12</td>
-                                                                <td>2016-03-19</td>
-                                                                <td>6:40</td>
-                                                                <td>Pokhara</td>
-                                                                <td>343</td>
+                                                                <?php foreach($Stops as $stops) { ?>
+                                                                <tr>
 
-                                                            </tr>
-                                                            <tr>
-                                                                <td>02</td>
-                                                                <td>2016-03-19</td>
-                                                                <td>2016-06-12</td>
-                                                                <td>5:30</td>
-                                                                <td>Beni</td>
-                                                                <td>433</td>
-
-                                                            </tr>
+                                                                    <td><?php echo $stops->days ?></td>
+                                                                    <td><?php echo $stops->Stop_no ?></td>
+                                                                    <td><?php echo $stops->latitude ?></td>
+                                                                    <td><?php echo $stops->longitude ?></td>
+                                                                    <td><?php echo $stops->altitude ?></td>
+                                                                    <td><?php echo $stops->remarks ?></td>
+                                                                    <td>
+                                                                        <form class="" method="POST"
+                                                                              action="{{ route('stops.destroy', $stops->id) }}">
+                                                                            <input type="hidden" name="_token"
+                                                                                   value="{{csrf_token()}}">
+                                                                            <input type="hidden" name="_method" value="delete"/>
+                                                                            <a href="{{route('stops.edit', $stops->id)}}"
+                                                                               class="btn btn-primary">Edit</a>
+                                                                            <input type="submit" class="btn btn-danger"
+                                                                                   onclick="return confirm('Confirm to Delete');"
+                                                                                   name="name " value="Delete">
+                                                                        </form>
+                                                                    </td>
+                                                                </tr>
+                                                            <?php } ?>
                                                             </tbody>
                                                         </table>
-
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
@@ -655,57 +523,53 @@
                                                         <thead>
                                                         <tr>
                                                             <th>Id</th>
-                                                            <th>Type</th>
-                                                            <th>Name</th>
-                                                            <th>Lat</th>
-                                                            <th>Long</th>
-                                                            <th>Alt</th>
-                                                            <th>Status</th>
-                                                            <th>&nbsp;</th>
-                                                            <th>&nbsp;</th>
+                                                            <th>Region</th>
+                                                            <th>Route Name</th>
+                                                            <th>No. Of Days</th>
+                                                            <th>Season</th>
+                                                            <th>Total Distance</th>
+                                                            <th>Start Latitude</th>
+                                                            <th>Start longitude&nbsp;</th>
+                                                            <th>Start Altitude&nbsp;</th>
+                                                            <th>End Latitude</th>
+                                                            <th>End longitude&nbsp;</th>
+                                                            <th>Ends Altitude&nbsp;</th>
+                                                            <th>Action </th>
                                                         </tr>
-
-                                                        <tr>
-                                                            <td width="10%"><input name="DATE" class="form-control" placeholder="Id"
-                                                                                   id="dp_date">
-
-                                                            </td>
-                                                            <td width="15%">
-                                                                <SELECT name="STATUS" class="form-control">
-                                                                    <OPTION VALUE="">Active</OPTION>
-                                                                    <OPTION VALUE="P">Inactive</OPTION>
-                                                                </SELECT>
-                                                            </td>
-                                                            <td width="30%">
-                                                                <input name="DATE" class="form-control" placeholder="Name"
-                                                                       id="dp_date">
-                                                            </td>
-                                                            <td width="10%">
-                                                                <input name="TIME" class="form-control" placeholder="Time"
-                                                                       id="dp_time">
-
-                                                            </td>
-                                                            <td width="10%">
-                                                                <input name="TIME" class="form-control" placeholder="Time"
-                                                                       id="dp_time">
-                                                            </td>
-                                                            <td width="10%">
-                                                                <input name="TIME" class="form-control" placeholder="Time"
-                                                                       id="dp_time">
-
-                                                            </td>
-                                                            <td width="10%">
-                                                                <input name="TIME" class="form-control" placeholder="Status"
-                                                                       id="dp_time">
-
-                                                            </td>
-                                                            <td>
-                                                                <button type="submit" class="btn btn-success">Submit</button>
-                                                            </td>
-                                                        </tr>
-
-
                                                         </thead>
+                                                        <tbody>
+                                                        <?php
+                                                            foreach ($Routes as $routes){
+                                                        ?>
+                                                        <tr>
+                                                            <td><?php echo $routes->id ?></td>
+                                                            <td><?php echo $routes->region ?></td>
+                                                            <td><?php echo $routes->sr_name ?></td>
+                                                            <td><?php echo $routes->no_days ?></td>
+                                                            <td><?php echo $routes->season ?></td>
+                                                            <td><?php echo $routes->total_distance ?></td>
+                                                            <td><?php echo $routes->start_latitude ?></td>
+                                                            <td><?php echo $routes->start_longitude ?></td>
+                                                            <td><?php echo $routes->start_altitude ?></td>
+                                                            <td><?php echo $routes->end_latitude ?></td>
+                                                            <td><?php echo $routes->end_longitude ?></td>
+                                                            <td><?php echo $routes->end_altitude ?></td>
+                                                            <td>
+                                                                <form class="" method="POST"
+                                                                      action="{{ route('routes.destroy', $routes->id) }}">
+                                                                    <input type="hidden" name="_token"
+                                                                           value="{{csrf_token()}}">
+                                                                    <input type="hidden" name="_method" value="delete"/>
+                                                                    <a href="{{route('routes.edit', $routes->id)}}"
+                                                                       class="btn btn-primary">Edit</a>
+                                                                    <input type="submit" class="btn btn-danger"
+                                                                           onclick="return confirm('Confirm to Delete');"
+                                                                           name="name " value="Delete">
+                                                                </form>
+                                                            </td>
+                                                        </tr>
+                                                        <?php } ?>
+                                                        </tbody>
                                                     </table>
                                                 </div>
                                             </div>
@@ -716,35 +580,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-3">
-
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <table width="100%" border="0">
-                        <tr>
-                            <td width="40%">&nbsp;</td>
-
-                            <td width="60%" align="center">
-                                <button type="submit" class="btn btn-success"> Add
-                                    New Route
-                                </button>
-                                </a>
-                            </td>
-                        </tr>
-                    </table>
-
-                    <table width="100%" class="table table-striped" border="0">
-                        <thead>
-                        <tr style="width:100%">
-                            <th width="95%">Route List</th>
-                            <th width="05%">&nbsp;</th>
-                        </tr>
-                        </thead>
-                    </table>
                 </div>
             </div>
         </div>

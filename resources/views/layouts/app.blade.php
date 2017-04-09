@@ -57,10 +57,7 @@
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
 
-                            <li>
-                                <a href="/pages/preference_setup">Preference Setup</a>
 
-                            </li>
 
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -69,17 +66,16 @@
 
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
                                     <li><a href="{{route('country.index') }}">Country</a></li>
-                                    <li><a href="/pages/generalsetup/embassy_contact">Embassy Contact</a></li>
+                                    <li><a href="{{route('embassy.index') }}">Embassy Contact</a></li>
                                     <li role="presentation" class="divider"></li>
-                                    <li><a href="/pages/generalsetup/place_type">Place Type</a></li>
-                                    <li><a href="/pages/generalsetup/location">Location</a></li>
-                                    <li><a href="/pages/generalsetup/route">Route</a></li>
+                                    <li><a href="{{route('place.index') }}">Place Type</a></li>
+                                    <li><a href="{{route('location.index') }}">Location</a></li>
+                                    <li><a href="{{route('routes.index') }}">Route</a></li>
                                     <li role="presentation" class="divider"></li>
-                                    <li><a href="/pages/generalsetup/weather_station">Weather Station</a></li>
-                                    <li><a href="/pages/generalsetup/incident_type">Incident Type</a></li>
+                                    <li><a href="{{route('incident.index') }}">Incident Type</a></li>
                                     <li role="presentation" class="divider"></li>
-                                    <li><a href="/pages/generalsetup/push_notification">Push Notification</a></li>
-                                    <li><a href="/pages/generalsetup/alert_notification">Alert Notification</a></li>
+                                    <li><a href="{{route('PushNotification.index') }}">Push Notification</a></li>
+                                    <li><a href="{{route('AlertNotification.index') }}">Alert Notification</a></li>
 
                                 </ul>
                             </li>
@@ -90,9 +86,12 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                    <li><a href="/pages/transaction/registration">User Registration</a></li>
-                                    <li><a href="/pages/transaction/weather">Daily Weather</a></li>
-                                    <li><a href="/pages/transaction/disperse">Disperse Notification/Alert</a></li>
+                                    <li><a href="{{route('registration.index') }}">User Registration</a></li>
+                                    <li><a href="{{route('disperse.index') }}">Disperse Notification/Alert</a></li>
+                                    <li role="presentation" class="divider"></li>
+                                    <li><a href="{{route('weather.index') }}">Daily Weather</a></li>
+                                    <li><a href="{{route('synopsis.index') }}">Weather Synopsis</a></li>
+
 
 
                                 </ul>

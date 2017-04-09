@@ -13,19 +13,18 @@ class CreateRouteIternariesTable extends Migration
      */
     public function up()
     {
-        Schema::create('route_iternaries', function (Blueprint $table) {
-            $table->increments('ri_id');
-            $table->string('sr_code');
-            $table->string('day');
-            $table->string('sr_start');
-            $table->string('sr_end');
-            $table->string('duration_hour');
-            $table->string('ri_desc');
-            $table->string('remarks');
-            $table->string('created_by');
-            $table->string('created_date');
-            $table->string('modified_by');
-            $table->string('modified_date');
+        Schema::create('route_itineraries', function (Blueprint $table) {
+            $table->increments('id');
+
+            $table->integer('sr_id')->unsigned();
+           // $table->foreign('sr_id')->references('id')->on('setup_route');
+
+            $table->integer('day')->nullable();
+            $table->string('start')->nullable();
+            $table->string('end')->nullable();
+            $table->integer('duration_hour')->nullable();
+            $table->string('desc')->nullable();
+            $table->string('remarks')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
@@ -38,6 +37,6 @@ class CreateRouteIternariesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('route_iternaries');
+        Schema::dropIfExists('route_itineraries');
     }
 }

@@ -14,16 +14,13 @@ class CreateRoutePhotoTable extends Migration
     public function up()
     {
         Schema::create('route_photo', function (Blueprint $table) {
-            $table->increments('rp_id');
-            $table->string('sr_code');
-            $table->string('rp_default');
-            $table->string('rp_image');
-            $table->string('rp_image_desc');
-            $table->string('remarks');
-            $table->string('created_by');
-            $table->string('created_date');
-            $table->string('modified_by');
-            $table->string('modified_date');
+            $table->increments('id');
+            $table->integer('sr_id')-> unsigned();
+            //$table->foreign('sr_id')-> references('id')-> on ('setup_route');
+            $table->string('rp_default')->nullable();
+            $table->string('rp_image')->nullable();
+            $table->string('rp_image_desc')->nullable();
+            $table->string('remarks')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

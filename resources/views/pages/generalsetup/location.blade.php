@@ -24,7 +24,10 @@
                                 <div class="container" style="padding:5px;width:100%">
 
                                     <div class="table-responsive">
-                                        <table width="98%">
+                                        <form action="{{ route ('location.store') }} " method="POST">
+                                            {{ csrf_field() }}
+
+                                            <table width="98%">
 
                                             <tr height="40">
                                                 <td width="28%"
@@ -36,8 +39,8 @@
                                                     <table width="100%">
                                                         <tr>
                                                             <td width="30%">
-                                                                <input class="form-control" type="hidden">
-
+                                                                <input class="form-control" id="id" name="id"
+                                                                       type="hidden">
 
                                                             <td align="right">&nbsp;</td>
 
@@ -58,7 +61,7 @@
                                                 </td>
                                                 <td align="center">:</td>
                                                 <td><input type="text" class="form-control" id="NAME"
-                                                           name="NAME" value=""
+                                                           name="name" value=""
                                                            placeholder="Enter Name "
                                                            required ></td>
                                             </tr>
@@ -72,7 +75,7 @@
                                                         <tr>
                                                             <td width="30%">
                                                                 <input type="text" class="form-control" id="LAT"
-                                                                       name="LAT" value=""
+                                                                       name="latitude" value=""
                                                                        placeholder="latitude"
                                                                        required >
                                                             </td>
@@ -83,7 +86,7 @@
                                                             <td width="30%">
 
                                                                 <input type="text" class="form-control" id="LON"
-                                                                       name="LON" value=""
+                                                                       name="longitude" value=""
                                                                        placeholder="Longitude"
                                                                        required >
 
@@ -95,7 +98,7 @@
                                                             <td width="30%">
 
                                                                 <input type="text" class="form-control" id="ALT"
-                                                                       name="ALT" value=""
+                                                                       name="altitude" value=""
                                                                        placeholder="Altitude"
                                                                        required >
 
@@ -109,7 +112,7 @@
                                                 <td align="right"> Details</td>
                                                 <td align="center">:</td>
                                                 <td><input type="text" class="form-control" id="DETAILS"
-                                                           name="DETAILS" value=""
+                                                           name="desc" value=""
                                                            placeholder="Enter Details"
                                                            required>
                                                 </td>
@@ -121,7 +124,7 @@
                                                 <td align="center" valign="top">:</td>
                                                 <td><textarea class="form-control" rows="1" id="REMARKS"
                                                               placeholder="Enter Remarks"
-                                                              name="REMARKS">
+                                                              name="remarks">
                                                         </textarea></td>
                                             </tr>
 
@@ -136,40 +139,16 @@
                                                             <td width="50%">
 
 
-                                                                <input type="hidden" name="operation"
-                                                                       value="submit">
-                                                                <button type="submit"
-                                                                        class="btn btn-success">
-                                                                    <b>Submit</b>
-                                                                </button>
-                                                                </form>
-
+                                                                <input type="submit" value="save" class="btn btn-primary pull-right">
                                                             </td>
-
-
-
-
-
-                                                            <td width="25%" align="left">
-
-                                                                <form role="form" method="post"
-                                                                      action="general_setup.php">
-                                                                    <button type="submit" class="btn btn-default">
-                                                                        Cancel
-                                                                    </button>
-                                                                </form>
-
-
-                                                            </td>
-
                                                         </tr>
                                                     </table>
-
-
                                                 </td>
                                             </tr>
 
                                         </table>
+                                        </form>
+
 
 
                                     </div>
@@ -191,56 +170,44 @@
                                                         <thead>
                                                         <tr>
                                                             <th>Id</th>
-                                                            <th>Type</th>
                                                             <th>Name</th>
                                                             <th>Lat</th>
                                                             <th>Long</th>
                                                             <th>Alt</th>
-                                                            <th>Status</th>
-                                                            <th>&nbsp;</th>
-                                                            <th>&nbsp;</th>
+                                                            <th>Description</th>
+                                                           <th>Remarks</th>
+                                                            <th>&nbsp;Action</th>
                                                         </tr>
-
-                                                        <tr>
-                                                            <td width="10%">3
-                                                            </th>
-                                                            <td width="20%">
-                                                                <input name="TYPE" class="form-control" placeholder="Type"
-                                                                       id="dp_date">
-                                                            </td>
-                                                            <td width="25%">
-                                                                <input name="NAME" class="form-control" placeholder="Name"
-                                                                       id="dp_time">
-
-                                                            </td>
-                                                            <td width="10%">
-                                                                <input name="LAT" class="form-control" placeholder="Lat"
-                                                                       id="dp_time">
-
-                                                            </td>
-                                                            <td width="10%">
-                                                                <input name="LONG" class="form-control" placeholder="Long"
-                                                                       id="dp_date">
-                                                            </td>
-                                                            <td width="10%">
-                                                                <input name="ALT" class="form-control" placeholder="Alt"
-                                                                       id="dp_time">
-
-                                                            </td>
-                                                            <td width="20%">
-                                                                <label class="switch">
-                                                                    <input type="checkbox">
-                                                                    <div class="slider round"></div>
-                                                                </label>
-                                                            </td>
-                                                            <td width="5%">
-                                                                <button type="submit" class="btn btn-success">Save</button>
-                                                            </td>
-
-                                                        </tr>
-
 
                                                         </thead>
+
+                                                        <tbody>
+                                                        <?php
+                                                        foreach ($setup_locations as $setup_location){?>
+                                                        <tr>
+                                                            <td><?php echo $setup_location->id ?></td>
+                                                            <td><?php echo $setup_location->name ?></td>
+                                                            <td><?php echo $setup_location->latitude ?></td>
+                                                            <td><?php echo $setup_location->longitude ?></td>
+                                                            <td><?php echo $setup_location->altitude ?></td>
+                                                            <td><?php echo $setup_location->desc ?></td>
+                                                            <td><?php echo $setup_location->remarks ?></td>
+                                                            <td>
+                                                                <form class="" method="POST"
+                                                                      action="{{ route('location.destroy', $setup_location->id) }}">
+                                                                    <input type="hidden" name="_token"
+                                                                           value="{{csrf_token()}}">
+                                                                    <input type="hidden" name="_method" value="delete"/>
+                                                                    <a href="{{route('location.edit', $setup_location->id)}}"
+                                                                       class="btn btn-primary">Edit</a>
+                                                                    <input type="submit" class="btn btn-danger"
+                                                                           onclick="return confirm('Confirm to Delete');"
+                                                                           name="name " value="Delete">
+                                                                </form>
+                                                            </td>
+                                                        </tr>
+                                                        <?php } ?>
+                                                        </tbody>
                                                     </table>
                                                 </div>
                                             </div>
@@ -259,18 +226,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <table width="100%" border="0">
-                        <tr>
-                            <td width="40%">&nbsp;</td>
 
-                            <td width="60%" align="center">
-                                <button type="submit" class="btn btn-success"> Add
-                                    New Location
-                                </button>
-                                </a>
-                            </td>
-                        </tr>
-                    </table>
 
                     <table width="100%" class="table table-striped" border="0">
                         <thead>
@@ -279,6 +235,26 @@
                             <th width="05%">&nbsp;</th>
                         </tr>
                         </thead>
+                        <tbody>
+                        <?php
+                        foreach ($setup_locations as $setup_location){?>
+                        <tr>
+                            <td><?php echo $setup_location->name ?></td>
+
+                            <td>
+                                <form class="" method="POST"
+                                      action="{{ route('location.destroy', $setup_location->id) }}">
+                                    <input type="hidden" name="_token"
+                                           value="{{csrf_token()}}">
+                                    <input type="hidden" name="_method" value="delete"/>
+                                    <a href="{{route('location.edit', $setup_location->id)}}"
+                                       class="btn btn-primary">Edit</a>
+
+                                </form>
+                            </td>
+                        </tr>
+                        <?php } ?>
+                        </tbody>
                     </table>
                 </div>
             </div>

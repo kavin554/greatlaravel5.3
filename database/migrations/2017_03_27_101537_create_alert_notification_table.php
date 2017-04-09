@@ -14,12 +14,18 @@ class CreateAlertNotificationTable extends Migration
     public function up()
     {
         Schema::create('alert_notification', function (Blueprint $table) {
-            $table->increments('an_id');
-            $table->string('an_date');
-            $table->string('an_title');
-            $table->string('an_desc');
-            $table->string('image_path');
-            $table->string('remarks');
+            $table->increments('id')->nullable();
+            //$table->string('an_id')->nullable();
+            $table->string('an_date')->nullable();
+            $table->string('an_title')->nullable();
+            $table->string('an_desc')->nullable();
+            $table->string('an_imei')->nullable();
+            $table->string('an_mobile_number')->nullable();
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
+            $table->string('altitude')->nullable();
+            $table->string('image_path')->nullable();
+            $table->string('remarks')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -27,8 +27,8 @@
                                                         <table width="100%">
                                                             <tr>
                                                                 <td width="30%">
-                                                                    <input class="form-control" id="id" name="id"
-                                                                           type="hidden">
+                                                                    <input type="text" class="form-control" id="id" name="id" value="{{$country->id}}"
+                                                                           type="hidden" readonly>
 
 
                                                                 <td align="right">&nbsp;</td>
@@ -139,10 +139,14 @@
                                                 <tr height="40">
                                                     <td align="right" valign="top">Remarks</td>
                                                     <td align="center" valign="top">:</td>
-                                                    <td><textarea class="form-control" rows="1" id="REMARKS"
-                                                                  placeholder="Enter Remarks"
-                                                                  name="remarks" value="{{$country->remarks}}">
-                                                        </textarea></td>
+                                                    <td><input type="text"
+                                                               class="form-control"
+                                                               id="remarks"
+                                                               name="remarks"
+                                                               value="{{$country->remarks}}"
+                                                               placeholder="Remarks"
+                                                               required>
+                                                        </td>
                                                 </tr>
 
 

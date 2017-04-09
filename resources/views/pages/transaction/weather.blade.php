@@ -49,83 +49,31 @@
                                                             <th>Humidity</th>
                                                             <th>Sunshine</th>
                                                             <th>Wind</th>
-                                                            <th>&nbsp;</th>
+                                                            <th>Remarks</th>
                                                             <th>&nbsp;</th>
 
                                                         </tr>
+                                                        </thead>
 
                                                         <tbody>
+                                                        <?php
+                                                        foreach ($weather as $weather_data){?>
                                                         <tr>
-                                                            <td width="5%">
-                                                                3
-                                                            </td>
-                                                            <td width="20%">
-                                                                <input name="STATION" class="form-control" placeholder="Station"
-                                                                       id="dp_time">
-
-                                                            </td>
-                                                            <td width="15%">
-                                                                <input name="DATE" class="form-control" placeholder="Date"
-                                                                       id="EMAIL">
-
-                                                            </td>
-                                                            <td width="10%">
-                                                                <input name="TIME" class="form-control" placeholder="Time"
-                                                                       id="EMAIL">
-
-                                                            </td>
-                                                            <td width="10%">
-                                                                <input name="RAIN" class="form-control" placeholder="Rain"
-                                                                       id="EMAIL">
-
-                                                            </td>
-                                                            <td width="10%">
-                                                                <input name="HUMIDITY" class="form-control"
-                                                                       placeholder="Humidity" id="EMAIL">
-
-                                                            </td>
-                                                            <td width="10%">
-                                                                <input name="SUNSHINE" class="form-control"
-                                                                       placeholder="Sunshine" id="EMAIL">
-
-                                                            </td>
-                                                            <td width="10%">
-                                                                <input name="WIND" class="form-control" placeholder="Wind"
-                                                                       id="EMAIL">
-
-
-                                                            <td>
-                                                                <button type="submit" class="btn btn-success">Submit</button>
-                                                            </td>
-                                                            <td align="center">&nbsp;</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>01</td>
-                                                            <td>Janakpur</td>
-                                                            <td>2061/01/32</td>
-                                                            <td>3:21</td>
-                                                            <td>23</td>
-                                                            <td>45</td>
-                                                            <td>43</td>
-                                                            <td>32</td>
-
+                                                            <td><?php echo $weather_data->id ?></td>
+                                                            <td><?php echo $weather_data->pl_id ?></td>
+                                                            <td><?php echo $weather_data->date ?></td>
+                                                            <td><?php echo $weather_data->time ?></td>
+                                                            <td><?php echo $weather_data->rain ?></td>
+                                                            <td><?php echo $weather_data->humidity ?></td>
+                                                            <td><?php echo $weather_data->sunshine ?></td>
+                                                            <td><?php echo $weather_data->wind ?></td>
+                                                            <td><?php echo $weather_data->remarks ?></td>
 
                                                         </tr>
-                                                        <tr>
-                                                            <td>02</td>
-                                                            <td>Palpa</td>
-                                                            <td>2061/04/32</td>
-                                                            <td>5:21</td>
-                                                            <td>53</td>
-                                                            <td>65</td>
-                                                            <td>83</td>
-                                                            <td>22</td>
-
-                                                        </tr>
+                                                        <?php } ?>
                                                         </tbody>
 
 
-                                                        </thead>
                                                     </table>
                                                 </div>
                                             </div>

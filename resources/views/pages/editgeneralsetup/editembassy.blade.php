@@ -11,7 +11,7 @@
 
 
                         <div class="table-responsive">
-                            <form action="{{ route ('country.update',$country->id) }} " method="POST">
+                            <form action="{{ route ('embassy.update',$embassy->id) }} " method="POST">
                                 <input type="hidden" name="_method" value="PATCH">
                                 {{ csrf_field() }}
 
@@ -26,10 +26,8 @@
                                         <td>
                                             <table width="100%">
                                                 <tr>
-                                                    <td width="30%">
-                                                        <input class="form-control" type="hidden">
-
-
+                                                    <input type="text" class="form-control" id="id" name="id" value="{{$embassy->id}}"
+                                                           type="hidden" readonly>
                                                     <td align="right">&nbsp;</td>
 
                                                     </td>
@@ -47,16 +45,16 @@
                                         <td width="28%" align="right">Location</td>
                                         <td width="02%" align="center">:</td>
                                         <td><input type="text" class="form-control" id="NAME"
-                                                   name="NAME" value=""
-                                                   placeholder="Location"
+                                                   name="location" value="{{$embassy->location}}"
+                                                   placeholder="Location">
                                     </tr>
 
                                     <tr height="40">
                                         <td width="28%" align="right">Contact Person</td>
                                         <td width="02%" align="center">:</td>
                                         <td><input type="text" class="form-control" id="CONTACT_PERSON"
-                                                   name="CONTACT_PERSON"
-                                                   value=""
+                                                   name="contact_person"
+                                                   value="{{$embassy->contact_person}}"
                                                    placeholder="Contact Person "
                                                    required></td>
                                     </tr>
@@ -69,8 +67,8 @@
                                                 <tr>
                                                     <td width="40%">
                                                         <input type="text" class="form-control"
-                                                               id="POSITION" name="POSITION"
-                                                               value=""
+                                                               id="POSITION" name="position"
+                                                               value="{{$embassy->position}}"
                                                                placeholder="Position "
                                                                required>
 
@@ -81,9 +79,9 @@
                                                     <td width="40%"><input type="text"
                                                                            class="form-control"
                                                                            id="MOBILE_NO"
-                                                                           name="MOBILE_NO"
-                                                                           value=""
-                                                                           placeholder="Mobile No "
+                                                                           name="mobile_no"
+                                                                           value="{{$embassy->position}}"
+                                                                           placeholder="mobile_no"
                                                                            required>
                                                     </td>
                                                 </tr>
@@ -94,10 +92,14 @@
                                     <tr height="40">
                                         <td align="right" valign="top">Remarks</td>
                                         <td align="center" valign="top">:</td>
-                                        <td><textarea class="form-control" rows="1" id="REMARKS"
-                                                      placeholder="Enter Remarks"
-                                                      name="REMARKS">
-                                                        </textarea></td>
+                                        <td><input type="text"
+                                                   class="form-control"
+                                                   id="remarks"
+                                                   name="remarks"
+                                                   value="{{$embassy->remarks}}"
+                                                   placeholder="Remarks"
+                                                   required>
+                                        </td>
                                     </tr>
 
 

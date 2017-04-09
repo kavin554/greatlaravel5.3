@@ -14,17 +14,24 @@ class CreateSetupRouteTable extends Migration
     public function up()
     {
         Schema::create('setup_route', function (Blueprint $table) {
-            $table->increments('sr_code');
-            $table->string('sr_name');
-            $table->string('sr_level');
-            $table->string('no_days');
-            $table->string('speciality');
-            $table->string('season');
-            $table->string('remarks');
-            $table->string('created_by');
-            $table->string('created_date');
-            $table->string('modified_by');
-            $table->string('modified_date');
+            $table->increments('id');
+            $table->string('region')->nullable();
+            $table->string('sr_name')->nullable();
+            $table->string('sr_level')->nullable();
+            $table->integer('no_days')->nullable();
+            $table->string('season')->nullable();
+            $table->integer('total_distance')->nullable();
+            $table->float('highest_point')->nullable();
+            $table->string('unit')->nullable();
+            $table->float('start_latitude')->nullable();
+            $table->float('start_longitude')->nullable();
+            $table->float('start_altitude')->nullable();
+            $table->float('end_latitude')->nullable();
+            $table->float('end_longitude')->nullable();
+            $table->float('end_altitude')->nullable();
+            $table->string('speciality')->nullable();
+            $table->string('resources')->nullable();
+            $table->string('remarks')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

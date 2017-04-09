@@ -40,6 +40,8 @@
                                                 <div class="panel panel-default">
 
                                                     <div class="table-responsive">
+                                                        <form action="{{ route ('registration.store') }} " method="POST">
+                                                            {{ csrf_field() }}
                                                         <table width="98%">
 
                                                             <tr height="40">
@@ -60,15 +62,15 @@
 
                                                                             </td>
 
-                                                                            <td align="right">Type</td>
+                                                                            <td align="right">Country</td>
                                                                             <td align="center">:</td>
                                                                             <td width="40%">
-                                                                                <SELECT name="STATUS"
-                                                                                        class="form-control">
-                                                                                    <OPTION VALUE="">Nepal</OPTION>
-                                                                                    <OPTION VALUE="P">China</OPTION>
-                                                                                    <OPTION VALUE="P">Srilanka</OPTION>
-                                                                                    <OPTION VALUE="P">Bhutan</OPTION>
+                                                                                <SELECT
+                                                                                        class="form-control" name="country_name">
+                                                                                    <OPTION VALUE="Nepal">Nepal</OPTION>
+                                                                                    <OPTION VALUE="China">China</OPTION>
+                                                                                    <OPTION VALUE="Srilanka">Srilanka</OPTION>
+                                                                                    <OPTION VALUE="Bhutan">Bhutan</OPTION>
                                                                                 </SELECT></td>
 
 
@@ -84,7 +86,7 @@
                                                                 </td>
                                                                 <td align="center">:</td>
                                                                 <td><input type="text" class="form-control" id="NAME"
-                                                                           name="NAME" value=""
+                                                                           name="user_name" value=""
                                                                            placeholder="Enter Name "
                                                                            required></td>
                                                             </tr>
@@ -103,10 +105,9 @@
                                                                         <tr>
                                                                             <td width="30%">
 
-                                                                                <input name="STREET"
-                                                                                       class="form-control"
+                                                                                <input class="form-control"
                                                                                        placeholder="Street "
-                                                                                       id="STREET">
+                                                                                       id="STREET" name="street">
 
                                                                             </td>
                                                                             <td width="02%">&nbsp;</td>
@@ -115,7 +116,7 @@
                                                                             <td width="02%">&nbsp;</td>
                                                                             <td width="30%">
 
-                                                                                <input name="CITY" class="form-control"
+                                                                                <input name="city" class="form-control"
                                                                                        placeholder="City " id="CITY">
 
                                                                             </td>
@@ -125,7 +126,7 @@
                                                                             <td width="02%">&nbsp;</td>
                                                                             <td width="30%">
 
-                                                                                <input name="STATE" class="form-control"
+                                                                                <input name="state" class="form-control"
                                                                                        placeholder="State " id="STATE">
 
                                                                             </td>
@@ -147,7 +148,7 @@
                                                                         <tr>
                                                                             <td width="40%">
 
-                                                                                <input name="MOBILE"
+                                                                                <input name="mobile_no"
                                                                                        class="form-control"
                                                                                        placeholder="Mobile "
                                                                                        id="MOBILE">
@@ -159,7 +160,7 @@
                                                                             <td width="02%">&nbsp;</td>
                                                                             <td width="40%">
 
-                                                                                <input name="HOME" class="form-control"
+                                                                                <input name="home_no" class="form-control"
                                                                                        placeholder="Home " id="HOME">
 
                                                                             </td>
@@ -177,7 +178,7 @@
                                                                         <tr>
                                                                             <td width="40%">
 
-                                                                                <input name="EMAIL1"
+                                                                                <input name="email_1"
                                                                                        class="form-control"
                                                                                        placeholder="Email " id="EMAIL1">
 
@@ -186,7 +187,7 @@
 
                                                                             <td width="40%">
 
-                                                                                <input name="EMAIL2"
+                                                                                <input name="email_2"
                                                                                        class="form-control"
                                                                                        placeholder="Alt Email "
                                                                                        id="EMAIL2">
@@ -212,7 +213,7 @@
                                                                         <tr>
                                                                             <td width="40%">
 
-                                                                                <input name="PP_NO" class="form-control"
+                                                                                <input name="passport_no" class="form-control"
                                                                                        placeholder="PP Number "
                                                                                        id="PP_NO">
 
@@ -224,7 +225,7 @@
                                                                             <td width="40%">
 
                                                                                 <SELECT name="STATUS"
-                                                                                        class="form-control">
+                                                                                        class="form-control" name="type">
                                                                                     <OPTION VALUE="">General</OPTION>
                                                                                     <OPTION VALUE="P">Diploment</OPTION>
 
@@ -245,7 +246,7 @@
                                                                         <tr>
                                                                             <td width="40%">
 
-                                                                                <input name="ISSUE_DATE"
+                                                                                <input name="issue_date"
                                                                                        class="form-control"
                                                                                        placeholder="Issue Date"
                                                                                        id="ISSUE_DATE">
@@ -257,7 +258,7 @@
                                                                             <td width="02%">&nbsp;</td>
                                                                             <td width="40%">
 
-                                                                                <input name="EXPIRE_DATE"
+                                                                                <input name="expiry_date"
                                                                                        class="form-control"
                                                                                        placeholder="Expire Date"
                                                                                        id="EXPIRE_DATE">
@@ -274,7 +275,7 @@
                                                                 <td align="center" valign="top">:</td>
                                                                 <td><textarea class="form-control" rows="1" id="REMARKS"
                                                                               placeholder="Enter Remarks"
-                                                                              name="REMARKS">
+                                                                              name="remarks">
                                                         </textarea></td>
                                                             </tr>
 
@@ -289,38 +290,15 @@
                                                                             <td width="50%">
 
 
-                                                                                <input type="hidden" name="operation"
-                                                                                       value="submit">
-                                                                                <button type="submit"
-                                                                                        class="btn btn-success">
-                                                                                    <b>Submit</b>
-                                                                                </button>
-                                                                                </form>
-
+                                                                                <input type="submit" value="save" class="btn btn-primary pull-right">
                                                                             </td>
-
-
-                                                                            <td width="25%" align="left">
-
-                                                                                <form role="form" method="post"
-                                                                                      action="general_setup.php">
-                                                                                    <button type="submit"
-                                                                                            class="btn btn-default">
-                                                                                        Cancel
-                                                                                    </button>
-                                                                                </form>
-
-
-                                                                            </td>
-
                                                                         </tr>
                                                                     </table>
-
-
                                                                 </td>
                                                             </tr>
 
                                                         </table>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
@@ -361,48 +339,41 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Name</th>
+                                            <th>Home No</th>
+                                            <th>Mobile No</th>
                                             <th>Email</th>
-                                            <th>Country</th>
-                                            <th>&nbsp;</th>
+                                            <th>Email</th>
                                             <th>&nbsp;</th>
                                         </tr>
                                         </thead>
+
                                         <tbody>
-
-
+                                        <?php
+                                        foreach ($user_registrations as $user_registration){?>
                                         <tr>
-                                            <th width="10%">
-                                                <input name="ID" class="form-control" placeholder="No"
-                                                       id="dp_date">
-                                                </SELECT>
-                                            </th>
-                                            <th width="30%">
-                                                <input name="NAME" class="form-control"
-                                                       placeholder="Name" id="dp_time">
-
-                                            </th>
-                                            <th width="30%">
-                                                <input name="EMAIL" class="form-control"
-                                                       placeholder="Email" id="EMAIL">
-
-                                            </th>
-                                            <th width="20%">
-                                                <SELECT name="COUNTRY" class="form-control">
-                                                    <OPTION VALUE="">Nepal</OPTION>
-                                                    <OPTION VALUE="P">China</OPTION>
-                                                    <OPTION VALUE="P">Srilanka</OPTION>
-                                                    <OPTION VALUE="P">Bhutan</OPTION>
-                                                </SELECT>
-                                            </th>
+                                            <td><?php echo $user_registration->id ?></td>
+                                            <td><?php echo $user_registration->user_name ?></td>
+                                            <td><?php echo $user_registration->home_no ?></td>
+                                            <td><?php echo $user_registration->mobile_no ?></td>
+                                            <td><?php echo $user_registration->email_1?></td>
+                                            <td><?php echo $user_registration->email_2 ?></td>
                                             <td>
-                                                <button type="submit" class="btn btn-success">Submit
-                                                </button>
+                                                <form class="" method="POST"
+                                                      action="{{ route('registration.destroy', $user_registration->id) }}">
+                                                    <input type="hidden" name="_token"
+                                                           value="{{csrf_token()}}">
+                                                    <input type="hidden" name="_method" value="delete"/>
+                                                    <a href="{{route('registration.edit', $user_registration->id)}}"
+                                                       class="btn btn-primary">Edit</a>
+                                                    <input type="submit" class="btn btn-danger"
+                                                           onclick="return confirm('Confirm to Delete');"
+                                                           name="name " value="Delete">
+                                                </form>
                                             </td>
-                                            <td align="center">&nbsp;</td>
                                         </tr>
-
-
+                                        <?php } ?>
                                         </tbody>
+
                                     </table>
                                 </div>
                             </div>
@@ -422,62 +393,45 @@
                                                            border="0">
                                                         <thead>
                                                         <tr>
-                                                            <th>ID</th>
+                                                            <th>No</th>
                                                             <th>Name</th>
-                                                            <th>Nationality</th>
-                                                            <th>PP Number</th>
+                                                            <th>Country</th>
+                                                            <th>Mobile No</th>
                                                             <th>Email</th>
-                                                            <th>Status</th>
-                                                            <th>&nbsp;</th>
+                                                            <th>Passport</th>
+                                                            <th>Issue Date</th>
+                                                            <th>Expiry Date</th>
                                                             <th>&nbsp;</th>
                                                         </tr>
-
-                                                        <tr>
-                                                            <td width="5%">3</td>
-                                                            <td width="30%">
-                                                                <input name="NAME" class="form-control"
-                                                                       placeholder="Name"
-                                                                       id="dp_time">
-
-                                                            </td>
-                                                            <td width="15%">
-                                                                <SELECT name="NATIONALITY"
-                                                                        class="form-control">
-                                                                    <OPTION VALUE="">Nepal</OPTION>
-                                                                    <OPTION VALUE="P">China</OPTION>
-                                                                    <OPTION VALUE="P">Srilanka</OPTION>
-                                                                    <OPTION VALUE="P">Bhutan</OPTION>
-                                                                </SELECT>
-                                                            </td>
-                                                            <td width="15%">
-                                                                <input name="PP_NUMBER"
-                                                                       class="form-control"
-                                                                       placeholder="PP No"
-                                                                       id="PP_NUMBER">
-
-                                                            </td>
-                                                            <td width="25%">
-                                                                <input name="EMAIL" class="form-control"
-                                                                       placeholder="Email"
-                                                                       id="EMAIL">
-
-                                                            </td>
-                                                            <td width="5%">
-                                                                <label class="switch">
-                                                                    <input type="checkbox">
-                                                                    <div class="slider round"></div>
-                                                                </label>
-                                                            </td>
-                                                            <td width="5%">
-                                                                <button type="submit"
-                                                                        class="btn btn-success">Save
-                                                                </button>
-                                                            </td>
-                                                            <td align="center">&nbsp;</td>
-                                                        </tr>
-
-
                                                         </thead>
+                                                        <tbody>
+                                                        <?php
+                                                        foreach ($user_registrations as $user_registration){?>
+                                                        <tr>
+                                                            <td><?php echo $user_registration->id ?></td>
+                                                            <td><?php echo $user_registration->user_name ?></td>
+                                                            <td><?php echo $user_registration->country_name ?></td>
+                                                            <td><?php echo $user_registration->mobile_no ?></td>
+                                                            <td><?php echo $user_registration->email_1?></td>
+                                                            <td><?php echo $user_registration->passport_no ?></td>
+                                                            <td><?php echo $user_registration->issue_date ?></td>
+                                                            <td><?php echo $user_registration->expiry_date ?></td>
+                                                            <td>
+                                                                <form class="" method="POST"
+                                                                      action="{{ route('registration.destroy', $user_registration->id) }}">
+                                                                    <input type="hidden" name="_token"
+                                                                           value="{{csrf_token()}}">
+                                                                    <input type="hidden" name="_method" value="delete"/>
+                                                                    <a href="{{route('registration.edit', $user_registration->id)}}"
+                                                                       class="btn btn-primary">Edit</a>
+                                                                    <input type="submit" class="btn btn-danger"
+                                                                           onclick="return confirm('Confirm to Delete');"
+                                                                           name="name " value="Delete">
+                                                                </form>
+                                                            </td>
+                                                        </tr>
+                                                        <?php } ?>
+                                                        </tbody>
                                                     </table>
                                                 </div>
                                             </div>

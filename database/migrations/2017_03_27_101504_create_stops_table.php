@@ -14,18 +14,15 @@ class CreateStopsTable extends Migration
     public function up()
     {
         Schema::create('stops', function (Blueprint $table) {
-            $table->increments('stop_id');
-            $table->string('sr_code');
-            $table->string('days');
-            $table->string('no_of_stops');
-            $table->string('latitude');
-            $table->string('longitude');
-            $table->string('altitude');
-            $table->string('remarks');
-            $table->string('created_by');
-            $table->string('created_date');
-            $table->string('modified_by');
-            $table->string('modified_date');
+            $table->increments('id');
+            $table->integer('sr_id')-> unsigned();
+            $table->foreign('sr_id')-> references('id')-> on ('setup_route');
+            $table->integer('days')->nullable();
+            $table->integer('Stop_no')->nullable();
+            $table->float('latitude')->nullable();
+            $table->float('longitude')->nullable();
+            $table->float('altitude')->nullable();
+            $table->string('remarks')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

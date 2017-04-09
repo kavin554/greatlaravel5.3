@@ -16,6 +16,9 @@ Route::get('/', function () {
 });
 
 /** Preference Setup*/
+Route::get('/pages/preference_setup', 'HomeController@preferenceSetup');
+
+/** General Setup*/
 
 // Routes for country
 Route::group(['middleware' => ['web']], function()
@@ -23,21 +26,87 @@ Route::group(['middleware' => ['web']], function()
     Route::resource('country','countryController');
 });
 
-Route::get('/pages/preference_setup', 'HomeController@preferenceSetup');
-Route::get('/pages/generalsetup/embassy_contact', 'HomeController@embassycontact');
-Route::get('/pages/generalsetup/place_type', 'HomeController@placetype');
-Route::get('/pages/generalsetup/location', 'HomeController@location');
-Route::get('/pages/generalsetup/route', 'HomeController@route');
-Route::get('/pages/generalsetup/weather_station', 'HomeController@weatherstation');
-Route::get('/pages/generalsetup/incident_type', 'HomeController@incidenttype');
-Route::get('/pages/generalsetup/push_notification', 'HomeController@pushnotification');
-Route::get('/pages/generalsetup/alert_notification', 'HomeController@alertnotification');
+// Routes for Embassy
+Route::group(['middleware' => ['web']], function()
+{
+    Route::resource('embassy','embassyController');
+});
+
+// Routes for Place Type
+Route::group(['middleware' => ['web']], function()
+{
+    Route::resource('place','placeController');
+});
+
+// Routes for Location
+Route::group(['middleware' => ['web']], function()
+{
+    Route::resource('location','locationController');
+});
+
+// Routes for Incident
+Route::group(['middleware' => ['web']], function()
+{
+    Route::resource('incident','incidentController');
+});
+
+// Routes for Route
+Route::group(['middleware' => ['web']], function()
+{
+    Route::resource('routes','RoutesController');
+});
+
+// Routes for Itineraries
+Route::group(['middleware' => ['web']], function()
+{
+    Route::resource('iteneraries','ItenerariesController');
+});
+
+// Routes for stops
+Route::group(['middleware' => ['web']], function()
+{
+    Route::resource('stops','StopsController');
+});
+
+// Routes for Push Notification
+Route::group(['middleware' => ['web']], function()
+{
+    Route::resource('PushNotification','PushNotificationController');
+});
+
+// Routes for Alert Notification
+Route::group(['middleware' => ['web']], function()
+{
+    Route::resource('AlertNotification','AlertNotificationController');
+});
 
 
 
-Route::get('/pages/transaction/registration', 'HomeController@registration');
-Route::get('/pages/transaction/weather', 'HomeController@weather');
-Route::get('/pages/transaction/disperse', 'HomeController@disperse');
+
+// Routes for Location
+Route::group(['middleware' => ['web']], function()
+{
+    Route::resource('registration','registrationController');
+});
+
+// Routes for Disperse
+Route::group(['middleware' => ['web']], function()
+{
+    Route::resource('disperse','alertController');
+});
+
+// Routes for Weather
+Route::group(['middleware' => ['web']], function()
+{
+    Route::resource('weather','weatherController');
+});
+
+// Routes for Synopsis
+Route::group(['middleware' => ['web']], function()
+{
+    Route::resource('synopsis','synopsisController');
+});
+
 
 
 

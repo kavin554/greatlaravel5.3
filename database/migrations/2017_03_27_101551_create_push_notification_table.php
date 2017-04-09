@@ -14,17 +14,18 @@ class CreatePushNotificationTable extends Migration
     public function up()
     {
         Schema::create('push_notification', function (Blueprint $table) {
-            $table->increments('pn_id');
-            $table->string('pn_date');
-            $table->string('pn_title');
-            $table->string('pn_desc');
-            $table->string('imei_number');
-            $table->string('mobile_number');
-            $table->string('latitude');
-            $table->string('longitude');
-            $table->string('altitude');
-            $table->string('image_path');
-            $table->string('remarks');
+            $table->increments('id');
+            $table->string('pn_id')->nullable();
+            $table->string('pn_date')->nullable();
+            $table->string('pn_title')->nullable();
+            $table->string('pn_desc')->nullable();
+            $table->string('imei_number')->nullable();
+            $table->string('mobile_number')->nullable();
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
+            $table->string('altitude')->nullable();
+            $table->string('image_path')->nullable();
+            $table->string('remarks')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

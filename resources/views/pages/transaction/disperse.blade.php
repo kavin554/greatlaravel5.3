@@ -16,7 +16,8 @@
                             <li role="presentation" class="active"><a href="#detail" aria-controls="home" role="tab"
                                                                       data-toggle="tab"> Disperseb Map </a></li>
                             <li role="presentation"><a href="#list" aria-controls="home" role="tab"
-                                                       data-toggle="tab"> Disperseb Notification/Alert Detail List </a></li>
+                                                       data-toggle="tab"> Disperseb Notification/Alert Detail List </a>
+                            </li>
 
                         </ul>
 
@@ -31,64 +32,115 @@
 
                             <div role="tabpanel" class="tab-pane" id="list">
                                 <div class="container" style="padding:5px;width:100%">
-                                    <div class="panel panel-default">
-                                    </div>
+                                    <div class="col-md-6">
 
-                                    <div class="list-group">
-                                        <div class="panel panel-default">
-                                            <div class="panel-body">
+                                        <div class="list-group">
+                                            <div class="panel panel-default">
+                                                <div class="panel-body">
+                                                    <div class="panel-heading"><b>
 
-                                                <div class="list-group">
-                                                    <table width="100%" class="table table-striped" border="0">
-                                                        <thead>
-                                                        <tr>
-                                                            <th>User</th>
-                                                            <th>Route</th>
-                                                            <th>Location</th>
-                                                            <th>Detail</th>
-                                                            <th>&nbsp;</th>
-                                                            <th>&nbsp;</th>
+                                                            <label>Disperse Alert Notification</label>
 
-                                                        </tr>
+                                                        </b></div>
 
-                                                        <tr>
-                                                            <td>Ram Khadka</td>
-                                                            <td>Janakpur</td>
-                                                            <td>Kalaiya</td>
-                                                            <td>Hot Place</td>
-                                                            <td align="center">&nbsp;</td>
-                                                            <td width="5%">
-                                                                <button type="submit" class="btn btn-success">Disperse</button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Hari Shrestha</td>
-                                                            <td>Palpa</td>
-                                                            <td>Janakpur</td>
-                                                            <td>Hot Place</td>
-                                                            <td align="center">&nbsp;</td>
-                                                            <td width="5%">
-                                                                <button type="submit" class="btn btn-success">Disperse</button>
-                                                            </td>
-                                                        </tr>
+                                                    <div class="list-group">
 
+                                                        <table width="100%" class="table table-striped" border="0">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>User</th>
+                                                                <th>Route</th>
+                                                                <th>Location</th>
+                                                                <th>Detail</th>
+                                                                <th>Remarks</th>
+                                                                <th>&nbsp;</th>
 
-                                                        </thead>
-                                                    </table>
+                                                            </tr>
+
+                                                            </thead>
+                                                            <tbody>
+                                                            <?php
+                                                            foreach ($AlertNotification as $alert_notification){?>
+                                                            <tr>
+                                                                <td><?php echo $alert_notification->id ?></td>
+                                                                <td><?php echo $alert_notification->an_title ?></td>
+                                                                <td><?php echo $alert_notification->an_desc ?></td>
+                                                                <td><?php echo $alert_notification->image_path ?></td>
+                                                                <td><?php echo $alert_notification->remarks ?></td>
+                                                                <td>
+                                                                    <input type="submit" value="Disperse"
+                                                                           class="btn btn-primary pull-right">
+                                                                </td>
+                                                            </tr>
+                                                            <?php } ?>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+
+                                    </div>
+
+                                    <div class="col-md-6">
+
+                                        <div class="list-group">
+                                            <div class="panel panel-default">
+                                                <div class="panel-body">
+                                                    <div class="panel-heading"><b>
+
+                                                            <label>Disperse Push Notification</label>
+
+                                                        </b></div>
+
+                                                    <div class="list-group">
+
+                                                        <table width="100%" class="table table-striped" border="0">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>User</th>
+                                                                <th>Route</th>
+                                                                <th>Location</th>
+                                                                <th>Detail</th>
+                                                                <th>Remarks</th>
+                                                                <th>&nbsp;</th>
+
+                                                            </tr>
+
+                                                            </thead>
+                                                            <tbody>
+                                                            <?php
+                                                            foreach ($PushNotification as $push_notification){?>
+                                                            <tr>
+                                                                <td><?php echo $push_notification->id ?></td>
+                                                                <td><?php echo $push_notification->pn_title ?></td>
+                                                                <td><?php echo $push_notification->pn_desc ?></td>
+                                                                <td><?php echo $push_notification->image_path ?></td>
+                                                                <td><?php echo $push_notification->remarks ?></td>
+                                                                <td>
+                                                                    <input type="submit" value="Disperse"
+                                                                           class="btn btn-primary pull-right">
+                                                                </td>
+                                                            </tr>
+                                                            <?php } ?>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
 
                                 </div>
+
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-
 
 
     </div>

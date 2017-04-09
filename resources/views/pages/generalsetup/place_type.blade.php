@@ -25,6 +25,8 @@
                                 <div class="container" style="padding:5px;width:100%">
 
                                     <div class="table-responsive">
+                                        <form action="{{ route ('place.store') }} " method="POST">
+                                            {{ csrf_field() }}
                                         <table width="98%">
 
                                             <tr height="40">
@@ -37,8 +39,8 @@
                                                     <table width="100%">
                                                         <tr>
                                                             <td width="30%">
-                                                                <input class="form-control" type="hidden">
-
+                                                                <input class="form-control" id="id" name="id"
+                                                                       type="hidden">
 
                                                             <td align="right">&nbsp;</td>
 
@@ -58,7 +60,7 @@
                                                 </td>
                                                 <td align="center">:</td>
                                                 <td><input type="text" class="form-control" id="NAME"
-                                                            name="NAME" value=""
+                                                            name="name" value=""
                                                             placeholder="Enter Name "
                                                             required >
                                                 </td>
@@ -83,7 +85,7 @@
                                                             <td height="40%">
                                                         <tr>
                                                             <td><input type="file" name="IMAGE_PATH"
-                                                                       id="IMAGE_PATH"></td>
+                                                                       id="image"></td>
                                                         </tr>
                                                         </td>
                                                         </tr>
@@ -97,7 +99,7 @@
                                                 <td align="center" valign="top">:</td>
                                                 <td><textarea class="form-control" rows="1" id="REMARKS"
                                                               placeholder="Enter Remarks"
-                                                              name="REMARKS">
+                                                              name="remarks">
                                                         </textarea></td>
                                             </tr>
 
@@ -112,40 +114,15 @@
                                                             <td width="50%">
 
 
-                                                                <input type="hidden" name="operation"
-                                                                       value="submit">
-                                                                <button type="submit"
-                                                                        class="btn btn-success">
-                                                                    <b>Submit</b>
-                                                                </button>
-                                                                </form>
-
+                                                                <input type="submit" value="save" class="btn btn-primary pull-right">
                                                             </td>
-
-
-
-
-
-                                                            <td width="25%" align="left">
-
-                                                                <form role="form" method="post"
-                                                                      action="general_setup.php">
-                                                                    <button type="submit" class="btn btn-default">
-                                                                        Cancel
-                                                                    </button>
-                                                                </form>
-
-
-                                                            </td>
-
                                                         </tr>
                                                     </table>
-
-
                                                 </td>
                                             </tr>
 
                                         </table>
+                                        </form>
 
 
                                     </div>
@@ -168,38 +145,42 @@
                                                         <tr>
                                                             <th>Code</th>
                                                             <th>Name</th>
-                                                            <th>Icon</th>
+                                                            <th>Image</th>
                                                             <th>Status</th>
-                                                            <th>&nbsp;</th>
+                                                            <th>Remarks</th>
                                                             <th>&nbsp;</th>
                                                         </tr>
 
-                                                        <tr>
-                                                            <td width="13%">
-                                                                <input name="CODE" class="form-control" placeholder="Code"
-                                                                       id="CODE">
-                                                            </td>
-                                                            <td>
-                                                                <input name="NAME" class="form-control" placeholder="Name"
-                                                                       id="NAME">
-                                                            </td>
-                                                            <td width="20%">
-                                                                <input type="file" name="IMAGE_PATH" id="IMAGE_PATH">
 
-                                                            </td>
-                                                            <td width="20%">
-                                                                <label class="switch">
-                                                                    <input type="checkbox">
-                                                                    <div class="slider round"></div>
-                                                                </label>
-                                                            </td>
-                                                            <td width="5%">
-                                                                <button type="submit" class="btn btn-success">Save</button>
-                                                            </td>
-                                                        </tr>
 
 
                                                         </thead>
+
+                                                        <tbody>
+                                                        <?php
+                                                        foreach ($place_types as $place_type){?>
+                                                        <tr>
+                                                            <td><?php echo $place_type->id ?></td>
+                                                            <td><?php echo $place_type->name ?></td>
+                                                            <td><?php echo $place_type->status ?></td>
+                                                            <td><?php echo $place_type->image ?></td>
+                                                            <td><?php echo $place_type->remarks ?></td>
+                                                            <td>
+                                                                <form class="" method="POST"
+                                                                      action="{{ route('place.destroy', $place_type->id) }}">
+                                                                    <input type="hidden" name="_token"
+                                                                           value="{{csrf_token()}}">
+                                                                    <input type="hidden" name="_method" value="delete"/>
+                                                                    <a href="{{route('place.edit', $place_type->id)}}"
+                                                                       class="btn btn-primary">Edit</a>
+                                                                    <input type="submit" class="btn btn-danger"
+                                                                           onclick="return confirm('Confirm to Delete');"
+                                                                           name="name " value="Delete">
+                                                                </form>
+                                                            </td>
+                                                        </tr>
+                                                        <?php } ?>
+                                                        </tbody>
                                                     </table>
                                                 </div>
                                             </div>
@@ -218,18 +199,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <table width="100%" border="0">
-                        <tr>
-                            <td width="40%">&nbsp;</td>
 
-                            <td width="60%" align="center">
-                                <button type="submit" class="btn btn-success"> Add
-                                    New Place Type
-                                </button>
-                                </a>
-                            </td>
-                        </tr>
-                    </table>
 
                     <table width="100%" class="table table-striped" border="0">
                         <thead>
@@ -238,6 +208,27 @@
                             <th width="05%">&nbsp;</th>
                         </tr>
                         </thead>
+
+                        <tbody>
+                        <?php
+                        foreach ($place_types as $place_type){?>
+                        <tr>
+                            <td><?php echo $place_type->name ?></td>
+
+                            <td>
+                                <form class="" method="POST"
+                                      action="{{ route('place.destroy', $place_type->id) }}">
+                                    <input type="hidden" name="_token"
+                                           value="{{csrf_token()}}">
+                                    <input type="hidden" name="_method" value="delete"/>
+                                    <a href="{{route('place.edit', $place_type->id)}}"
+                                       class="btn btn-primary">Edit</a>
+
+                                </form>
+                            </td>
+                        </tr>
+                        <?php } ?>
+                        </tbody>
                     </table>
                 </div>
             </div>

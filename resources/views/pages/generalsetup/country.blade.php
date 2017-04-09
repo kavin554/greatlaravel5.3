@@ -151,10 +151,11 @@
                                             <tr height="40">
                                                 <td align="right" valign="top">Remarks</td>
                                                 <td align="center" valign="top">:</td>
-                                                <td><textarea class="form-control" rows="1" id="REMARKS"
+                                                <td><input type="text"
+                                                           class="form-control" id="REMARKS"
                                                               placeholder="Enter Remarks"
                                                               name="remarks">
-                                                        </textarea></td>
+                                                        </td>
                                             </tr>
 
 
@@ -282,6 +283,7 @@
                         </td>
                     </tr>
                     <?php } ?>
+                    </tbody>
 
                 </table>
             </div>
