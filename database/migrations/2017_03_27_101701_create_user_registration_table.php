@@ -16,7 +16,9 @@ class CreateUserRegistrationTable extends Migration
         Schema::create('user_registration', function (Blueprint $table) {
             $table->increments('id')->nullable();
             $table->string('user_name')->nullable();
-            $table->string('country_name')->nullable();
+            $table->integer('country_id')-> unsigned();
+            $table->foreign('country_id')-> references('id')-> on ('country');
+            $table->string('image')->nullable();
             $table->string('street')->nullable();
             $table->string('city')->nullable();
             $table->string('state')->nullable();

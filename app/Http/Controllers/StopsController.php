@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Routes;
 use App\Stops;
+use App\location;
 use App\routeiteneraries;
 use App\Http\Requests;
 
@@ -17,10 +18,11 @@ class StopsController extends Controller
      */
     public function index()
     {
-        $routes = Routes::all();
-        $route_iteneraries = routeiteneraries::all();
-        $stops = Stops::all();
-        return View('pages.generalsetup.route')->with('Routes', $routes)->with('routeiteneraries', $route_iteneraries)->with('Stops', $stops);
+        $$routes = Routes::all();
+        $route_itineraries =routeiteneraries::all();
+        $stops =Stops::all();
+        $setup_location =location::all();
+        return View('pages.generalsetup.route')->with('Routes', $routes)->with('routeiteneraries', $route_itineraries)->with('Stops', $stops)->with('location', $setup_location);
     }
 
     /**
@@ -44,6 +46,8 @@ class StopsController extends Controller
         //create new data
         $stops = new Stops;
         $stops ->days =$request->days;
+        $stops ->sr_id =$request->sr_id;
+        $stops ->sl_id =$request->sl_id;
         $stops ->Stop_no =$request->stops;
         $stops ->latitude =$request->latitude;
         $stops ->longitude =$request->longitude;
@@ -88,6 +92,8 @@ class StopsController extends Controller
         //update data
         $stops = Stops:: findOrFail($id);
         $stops ->days =$request->days;
+        $stops ->sr_id =$request->sr_id;
+        $stops ->sl_id =$request->sl_id;
         $stops ->Stop_no =$request->stops;
         $stops ->latitude =$request->latitude;
         $stops ->longitude =$request->longitude;

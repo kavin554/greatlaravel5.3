@@ -1,6 +1,6 @@
 
-
 <BODY>
+@include('layouts.image')
 @include('layouts.app')
 <div class="container-fluid">
     <div class="row">
@@ -25,7 +25,7 @@
                                 <div class="container" style="padding:5px;width:100%">
 
                                     <div class="table-responsive">
-                                        <form action="{{ route ('place.store') }} " method="POST">
+                                        <form action="{{ route ('place.store') }} " method="POST" enctype="multipart/form-data">
                                             {{ csrf_field() }}
                                         <table width="98%">
 
@@ -76,16 +76,15 @@
                                                         <tr>
                                                             <td width="15%">
 
-                                                                <img src="../../GHT/image/logo.png"
-                                                                     style="width:200px;height:120px;">
+                                                                <img src="" height="200" alt="Image preview...">
 
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td height="40%">
                                                         <tr>
-                                                            <td><input type="file" name="IMAGE_PATH"
-                                                                       id="image"></td>
+                                                            <td><input type="file" name="place" accept="image/"
+                                                                       id="place" onchange="previewFile()" required></td>
                                                         </tr>
                                                         </td>
                                                         </tr>
@@ -146,7 +145,6 @@
                                                             <th>Code</th>
                                                             <th>Name</th>
                                                             <th>Image</th>
-                                                            <th>Status</th>
                                                             <th>Remarks</th>
                                                             <th>&nbsp;</th>
                                                         </tr>
@@ -162,8 +160,7 @@
                                                         <tr>
                                                             <td><?php echo $place_type->id ?></td>
                                                             <td><?php echo $place_type->name ?></td>
-                                                            <td><?php echo $place_type->status ?></td>
-                                                            <td><?php echo $place_type->image ?></td>
+                                                            <td><img src="{{ asset('img/place/')}}/{{ $place_type->image }}"></td>
                                                             <td><?php echo $place_type->remarks ?></td>
                                                             <td>
                                                                 <form class="" method="POST"

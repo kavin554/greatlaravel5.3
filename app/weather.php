@@ -15,4 +15,8 @@ class weather extends Model
     public function weather_forcast(){
         return $this ->hasOne('App\weather_forcast');
     }
+
+    public function synopsis(){
+        return $this ->hasOne('App\synopsis');
+    }
 }

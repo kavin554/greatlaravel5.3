@@ -15,4 +15,9 @@ class registration extends Model
     public function trace(){
         return $this ->hasOne('App\trace');
     }
+
+    public function country()
+    {
+        return $this->belongsTo('App\country');
+    }
 }

@@ -11,7 +11,7 @@
 
 
                         <div class="table-responsive">
-                            <form action="{{ route ('place.update',$place_type->id) }} " method="POST">
+                            <form action="{{ route ('place.update',$place_type->id) }} " method="POST" enctype="multipart/form-data">
                                 <input type="hidden" name="_method" value="PATCH">
                                 {{ csrf_field() }}
 
@@ -65,16 +65,15 @@
                                                 <tr>
                                                     <td width="15%">
 
-                                                        <img src="../../GHT/image/logo.png"
-                                                             style="width:200px;height:120px;">
+                                                        <img src="" height="200" alt="Image preview..." value="{{ asset('img/place/')}}/{{ $place_type->image }}">
 
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td height="40%">
                                                 <tr>
-                                                    <td><input type="file" name="IMAGE_PATH"
-                                                               id="image"></td>
+                                                    <td><input type="file" name="flag" accept="image/"
+                                                                           id="flag" onchange="previewFile()" value="{{ $place_type->image }}"></td>
                                                 </tr>
                                                 </td>
                                                 </tr>

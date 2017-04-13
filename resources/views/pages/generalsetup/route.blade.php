@@ -52,20 +52,20 @@
                                                             <td align="center">:</td>
                                                             <td width="55%"><SELECT name="region"
                                                                                     class="form-control">
-                                                                    <OPTION VALUE="">Far Western Development
-                                                                        Region
+                                                                    <OPTION VALUE="Far Western Development Region">
+                                                                        Far Western Development Region
                                                                     </OPTION>
-                                                                    <OPTION VALUE="">Mid Western Development
-                                                                        Region
+                                                                    <OPTION VALUE="Mid Western Development Region">
+                                                                        Mid Western Development Region
                                                                     </OPTION>
-                                                                    <OPTION VALUE="">Western Development
-                                                                        Region
+                                                                    <OPTION VALUE="Western Development Region">
+                                                                        Western Development Region
                                                                     </OPTION>
-                                                                    <OPTION VALUE="">Central Development
-                                                                        Region
+                                                                    <OPTION VALUE="Central Development Region">
+                                                                        Central Development Region
                                                                     </OPTION>
-                                                                    <OPTION VALUE="">Eastern Development
-                                                                        Region
+                                                                    <OPTION VALUE="Eastern Development Region">
+                                                                        Eastern Development Region
                                                                     </OPTION>
                                                                     OPTION>
                                                                 </SELECT></td>
@@ -102,9 +102,9 @@
                                                             <td width="40%">
                                                                 <div class="input-append date">
                                                                     <SELECT name="level" class="form-control">
-                                                                        <OPTION VALUE="">Level 1</OPTION>
-                                                                        <OPTION VALUE="P">Level 2</OPTION>
-                                                                        <OPTION VALUE="A">Level 3</OPTION>
+                                                                        <OPTION VALUE="Level 1">Level 1</OPTION>
+                                                                        <OPTION VALUE="Level 2">Level 2</OPTION>
+                                                                        <OPTION VALUE="Level 3">Level 3</OPTION>
                                                                     </SELECT>
                                                                 </div>
                                                             </td>
@@ -149,8 +149,8 @@
                                                             <td width="02%">&nbsp;</td>
                                                             <td width="20%"><SELECT name="unit"
                                                                                     class="form-control">
-                                                                    <OPTION VALUE="">Feet</OPTION>
-                                                                    <OPTION VALUE="P">Meter</OPTION>
+                                                                    <OPTION VALUE="Feet">Feet</OPTION>
+                                                                    <OPTION VALUE="Meter">Meter</OPTION>
 
                                                                 </SELECT></td>
                                                         </tr>
@@ -305,13 +305,14 @@
                                         <div class="panel-body">
                                             <div class="list-group">
                                                 <div class="list-group">
-                                                    <form method="post" action="{{ route('iteneraries.store') }}">
+                                                    <form action="{{ route('iteneraries.store') }}" method="post" >
                                                         {{ csrf_field() }}
                                                     <table width="100%" class="table table-striped" border="0">
 
                                                         <thead>
                                                         <tr>
                                                             <th>Day</th>
+                                                            <th>Route Name </th>
                                                             <th>Start</th>
                                                             <th>End</th>
                                                             <th>Duration</th>
@@ -328,6 +329,16 @@
                                                                        placeholder="Day"
                                                                        id="day">
                                                             </td>
+                                                            <td width="15%">
+                                                                <SELECT class="form-control" name="sr_id">
+                                                                    <?php foreach  ($Routes as $routes) { ?>
+                                                                    <OPTION value="{{ $routes->id }}" name="sr_id"><?php echo $routes->sr_name ?>
+                                                                    </OPTION>
+                                                                    <?php } ?>
+
+                                                                </SELECT>
+                                                            </td>
+
                                                             <td width="15%">
                                                                 <input name="start_date" class="form-control"
                                                                        placeholder="Start"
@@ -362,21 +373,22 @@
                                                         </tr>
                                                         </thead>
                                                         <tbody>
-                                                        <?php foreach($routeiteneraries as $route_itineraries) {?>
+                                                        <?php foreach($routeiteneraries as $route_iteneraries) {?>
                                                         <tr>
-                                                            <td><?php echo $route_itineraries->day  ?></td>
-                                                            <td><?php echo $route_itineraries->start  ?></td>
-                                                            <td><?php echo $route_itineraries->end  ?></td>
-                                                            <td><?php echo $route_itineraries->duration_hour ?></td>
-                                                            <td><?php echo $route_itineraries->desc  ?></td>
-                                                            <td><?php echo $route_itineraries->remarks  ?></td>
+                                                            <td><?php echo $route_iteneraries->day  ?></td>
+                                                            <td><?php echo $route_iteneraries->sr_id  ?></td>
+                                                            <td><?php echo $route_iteneraries->start  ?></td>
+                                                            <td><?php echo $route_iteneraries->end  ?></td>
+                                                            <td><?php echo $route_iteneraries->duration_hour ?></td>
+                                                            <td><?php echo $route_iteneraries->desc  ?></td>
+                                                            <td><?php echo $route_iteneraries->remarks  ?></td>
                                                             <td>
                                                                 <form class="" method="POST"
                                                                       action="{{ route('iteneraries.destroy', $route_iteneraries->id) }}">
                                                                     <input type="hidden" name="_token"
                                                                            value="{{csrf_token()}}">
                                                                     <input type="hidden" name="_method" value="delete"/>
-                                                                    <a href="{{route('iteneraries.edit', $route_iteneraries->id)}}"
+                                                                    <a href="{{ route('iteneraries.edit', $route_iteneraries->id) }}"
                                                                        class="btn btn-primary">Edit</a>
                                                                     <input type="submit" class="btn btn-danger"
                                                                            onclick="return confirm('Confirm to Delete');"
@@ -418,6 +430,8 @@
                                                             <thead>
                                                             <tr>
                                                                 <th>Day</th>
+                                                                <th>Route Name</th>
+                                                                <th>Location Name</th>
                                                                 <th>No of Stops</th>
                                                                 <th>Latitude</th>
                                                                 <th>Longitude</th>
@@ -432,6 +446,27 @@
                                                                 <td width="5%">
                                                                     <input name="days" class="form-control"
                                                                            placeholder="No of days" id="dp_date">
+                                                                </td>
+                                                                <td width="15%">
+                                                                    <SELECT class="form-control" name="sr_id"
+                                                                            value="">
+                                                                        <?php foreach  ($Routes as $routes) { ?>
+                                                                        <OPTION VALUE="{{ $routes->id }}" name="sr_id"><?php echo $routes->sr_name ?>
+                                                                        </OPTION>
+                                                                        <?php } ?>
+
+                                                                    </SELECT>
+                                                                </td>
+
+                                                                <td width="15%">
+                                                                    <SELECT class="form-control" name="sl_id"
+                                                                            value="">
+                                                                        <?php foreach  ($location as $setup_location) { ?>
+                                                                        <OPTION VALUE="{{ $setup_location->id }}" name="sl_id"><?php echo $setup_location->name ?>
+                                                                        </OPTION>
+                                                                        <?php } ?>
+
+                                                                    </SELECT>
                                                                 </td>
                                                                 <td width="15%">
                                                                     <input name="stops" class="form-control"
@@ -470,6 +505,8 @@
                                                                 <tr>
 
                                                                     <td><?php echo $stops->days ?></td>
+                                                                    <td><?php echo $stops->sr_id ?></td>
+                                                                    <td><?php echo $stops->sl_id ?></td>
                                                                     <td><?php echo $stops->Stop_no ?></td>
                                                                     <td><?php echo $stops->latitude ?></td>
                                                                     <td><?php echo $stops->longitude ?></td>

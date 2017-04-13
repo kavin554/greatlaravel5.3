@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 use App\synopsis;
+use App\weather;
 
 
 class synopsisController extends Controller
@@ -19,7 +20,9 @@ class synopsisController extends Controller
     public function index()
     {
         $synopsis =synopsis::all();
-        return view('pages.transaction.weather_synopsis', ['synopsis' => $synopsis]);
+        $weather_data =weather::all();
+
+        return view('pages.transaction.weather_synopsis')->with ('synopsis', $synopsis)->with ('weather', $weather_data);
     }
 
     /**
@@ -42,6 +45,7 @@ class synopsisController extends Controller
     {
         //create new data
         $synopsis = new synopsis;
+        $synopsis ->wd_id =$request->wd_id;
         $synopsis ->nwp_a =$request->nwp_a;
         $synopsis ->nwp_b =$request->nwp_b;
         $synopsis ->nwp_c =$request->nwp_c;
@@ -91,6 +95,7 @@ class synopsisController extends Controller
     public function update(Request $request, $id)
     {
         $synopsis = synopsis:: findOrFail($id);
+        $synopsis ->wd_id =$request->wd_id;
         $synopsis ->nwp_a =$request->nwp_a;
         $synopsis ->nwp_b =$request->nwp_b;
         $synopsis ->nwp_c =$request->nwp_c;

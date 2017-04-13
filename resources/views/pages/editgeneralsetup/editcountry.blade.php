@@ -1,3 +1,22 @@
+<script>
+    function previewFile(){
+        var preview = document.querySelector('img'); //selects the query named img
+        var file    = document.querySelector('input[type=file]').files[0]; //sames as here
+        var reader  = new FileReader();
+
+        reader.onloadend = function () {
+            preview.src = reader.result;
+        }
+
+        if (file) {
+            reader.readAsDataURL(file); //reads the data as a URL
+        } else {
+            preview.src = "";
+        }
+    }
+
+    previewFile();  //calls the function named previewFile()
+</script>
 <BODY>
 @include('layouts.app')
 <div class="container-fluid">
@@ -11,7 +30,7 @@
 
 
                                     <div class="table-responsive">
-                                        <form action="{{ route ('country.update',$country->id) }} " method="POST">
+                                        <form action="{{ route ('country.update',$country->id) }} " method="POST" enctype="multipart/form-data">
                                             <input type="hidden" name="_method" value="PATCH">
                                             {{ csrf_field() }}
 
@@ -116,18 +135,13 @@
                                                     <td>
                                                         <table width="100%">
                                                             <tr>
-                                                                <td width="15%">
-
-                                                                    <img src="../../GHT/image/logo.png"
-                                                                         style="width:204px;height:120px;">
-
-                                                                </td>
+                                                                <img src="" height="200" alt="Image preview..." value="{{ asset('img/flag/')}}/{{ $country->flag }}">
                                                             </tr>
                                                             <tr>
                                                                 <td height="40%">
                                                             <tr>
-                                                                <td><input type="file" name="IMAGE_PATH"
-                                                                           id="flag" value="{{$country->flag}}"></td>
+                                                                <td><input type="file" name="flag" accept="image/"
+                                                                           id="flag" onchange="previewFile()" value="{{ $country->flag }}"></td>
                                                             </tr>
                                                             </td>
                                                             </tr>

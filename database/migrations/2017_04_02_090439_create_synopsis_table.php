@@ -15,6 +15,8 @@ class CreateSynopsisTable extends Migration
     {
         Schema::create('synopsis', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('wd_id')->unsigned();
+            $table->foreign('wd_id')->references('id')-> on ('weather_data');
             $table->string('nwp_a')->nullable();
             $table->string('nwp_b')->nullable();
             $table->string('nwp_c')->nullable();

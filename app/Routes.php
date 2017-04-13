@@ -23,4 +23,12 @@ class Routes extends Model
     public function trace(){
         return $this ->hasOne('App\trace');
     }
+
+    public function AlertNotification(){
+        return $this ->hasMany('App\AlertNotification');
+    }
+
+    public function PushNotification(){
+        return $this ->hasMany('App\AlertNotification');
+    }
 }

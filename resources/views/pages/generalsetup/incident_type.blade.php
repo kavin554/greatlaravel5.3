@@ -1,4 +1,22 @@
+<script>
+    function previewFile(){
+        var preview = document.querySelector('img'); //selects the query named img
+        var file    = document.querySelector('input[type=file]').files[0]; //sames as here
+        var reader  = new FileReader();
 
+        reader.onloadend = function () {
+            preview.src = reader.result;
+        }
+
+        if (file) {
+            reader.readAsDataURL(file); //reads the data as a URL
+        } else {
+            preview.src = "";
+        }
+    }
+
+    previewFile();  //calls the function named previewFile()
+</script>
 
 <BODY>
 @include('layouts.app')
@@ -25,7 +43,7 @@
                                 <div class="container" style="padding:5px;width:100%">
 
                                     <div class="table-responsive">
-                                        <form action="{{ route ('incident.store') }} " method="POST">
+                                        <form action="{{ route ('incident.store') }} " method="POST" enctype="multipart/form-data">
                                             {{ csrf_field() }}
                                         <table width="98%">
 
@@ -77,10 +95,10 @@
                                                                 <div class="input-append date">
                                                                     <SELECT name="type"
                                                                             class="form-control">
-                                                                        <OPTION VALUE="">Information
+                                                                        <OPTION VALUE="Information">Information
                                                                         </OPTION>
-                                                                        <OPTION VALUE="P">Warning</OPTION>
-                                                                        <OPTION VALUE="A">Alert</OPTION>
+                                                                        <OPTION VALUE="Warning">Warning</OPTION>
+                                                                        <OPTION VALUE="Alert">Alert</OPTION>
                                                                     </SELECT>
                                                                 </div>
                                                             </td>
@@ -101,16 +119,15 @@
                                                         <tr>
                                                             <td width="15%">
 
-                                                                <img src="../../GHT/image/logo.png"
-                                                                     style="width:204px;height:120px;">
+                                                                <img src="" height="200" alt="Image preview...">
 
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td height="40%">
                                                         <tr>
-                                                            <td><input type="file" name="image"
-                                                                       id="IMAGE_PATH"></td>
+                                                            <td><input type="file" name="incident" accept="image/"
+                                                                           id="incident" onchange="previewFile()" required></td>
                                                         </tr>
                                                         </td>
                                                         </tr>
@@ -182,7 +199,7 @@
                                                             <td><?php echo $incident_type->id ?></td>
                                                             <td><?php echo $incident_type->incident_name ?></td>
                                                             <td><?php echo $incident_type->type ?></td>
-                                                            <td><?php echo $incident_type->image ?></td>
+                                                            <td><img src="{{ asset('img/incident/')}}/{{ $incident_type->image }}"></td>
                                                             <td><?php echo $incident_type->remarks ?></td>
                                                             <td>
                                                                 <form class="" method="POST"

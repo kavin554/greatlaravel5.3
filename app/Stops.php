@@ -11,4 +11,8 @@ class Stops extends Model
     public function Routes(){
         return $this -> belongsTo('App\Routes');
     }
+
+    public function location(){
+        return $this -> belongsTo('App\location');
+    }
 }

@@ -8,6 +8,9 @@ use App\Http\Requests;
 
 use App\AlertNotification;
 
+use App\Routes;
+
+
 class AlertNotificationController extends Controller
 {
     /**
@@ -18,7 +21,9 @@ class AlertNotificationController extends Controller
     public function index()
     {
         $alert_notification = AlertNotification::all();
-        return view('pages.generalsetup.alert_notification', ['AlertNotification' => $alert_notification]);
+        $routes = Routes::all();
+
+        return view('pages.generalsetup.alert_notification')->with('AlertNotification' , $alert_notification)->with('Routes', $routes);
     }
 
     /**
@@ -41,6 +46,7 @@ class AlertNotificationController extends Controller
     {
         //create new data
         $alert_notification = new AlertNotification;
+        $alert_notification ->sr_id =$request->sr_id;
         $alert_notification ->an_title =$request->name;
         $alert_notification ->an_desc =$request->desc;
         $alert_notification ->an_date =$request->pnDate;
@@ -89,6 +95,7 @@ class AlertNotificationController extends Controller
     {
         //Update data
         $alert_notification = AlertNotification:: findOrFail($id);
+        $alert_notification ->sr_id =$request->sr_id;
         $alert_notification ->an_title =$request->name;
         $alert_notification ->an_desc =$request->desc;
         $alert_notification ->an_date =$request->pnDate;

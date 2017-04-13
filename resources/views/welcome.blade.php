@@ -77,12 +77,12 @@
                 </div>
             @endif
 
-            <div class="">
-                <div>
+
+                <div class="content">
                     <object type="text/html" data="http://www.greathimalayatrails.com/" width="1300px" height="500px" style="overflow:auto;border:5px  ">
                     </object>
                 </div>
-            </div>
+
         </div>
     </body>
 </html>

@@ -8,6 +8,9 @@ use App\PushNotification;
 
 use App\Http\Requests;
 
+use App\Routes;
+
+
 class PushNotificationController extends Controller
 {
     /**
@@ -18,7 +21,8 @@ class PushNotificationController extends Controller
     public function index()
     {
         $push_notification = PushNotification::all();
-        return view('pages.generalsetup.push_notification', ['PushNotification' => $push_notification]);
+        $routes = Routes::all();
+        return view('pages.generalsetup.push_notification')->with('PushNotification', $push_notification)->with('Routes', $routes);
     }
 
     /**
@@ -43,6 +47,8 @@ class PushNotificationController extends Controller
         $push_notification = new PushNotification;
 //        $push_notification ->id =$request->id;
 //        $push_notification ->pn_id =$request->pn_id;
+        $push_notification ->sr_id =$request->sr_id;
+
         $push_notification ->pn_title =$request->name;
         $push_notification ->pn_desc =$request->desc;
         $push_notification ->pn_date =$request->pnDate;
@@ -91,6 +97,8 @@ class PushNotificationController extends Controller
     {
         //Update data
         $push_notification = PushNotification:: findOrFail($id);
+        $push_notification ->sr_id =$request->sr_id;
+
         $push_notification ->pn_title =$request->name;
         $push_notification ->pn_desc =$request->desc;
         $push_notification ->pn_date =$request->pnDate;

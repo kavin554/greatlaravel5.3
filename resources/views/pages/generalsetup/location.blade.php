@@ -46,6 +46,19 @@
 
                                                             </td>
 
+                                                            <td width="02%">&nbsp;</td>
+                                                            <td align="right">Place Name</td>
+                                                            <td align="center">:</td>
+                                                            <td width="40%">
+                                                                <SELECT class="form-control" name="pl_id">
+                                                                    <?php foreach  ($place as $place_type) { ?>
+                                                                    <OPTION value="{{ $place_type->id }}" name="pl_id"><?php echo $place_type->name ?>
+                                                                    </OPTION>
+                                                                    <?php } ?>
+
+                                                                </SELECT>
+
+                                                            </td>
 
 
 

@@ -16,6 +16,10 @@ class location extends Model
         return $this ->hasOne('App\weather');
     }
 
+    public function Stops(){
+        return $this ->hasOne('App\Stops');
+    }
+
 
 
 }

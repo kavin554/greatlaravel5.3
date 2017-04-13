@@ -1,4 +1,6 @@
+
 <BODY>
+@include('layouts.image')
 @include('layouts.app')
 <div class="container-fluid">
     <div class="row">
@@ -24,7 +26,7 @@
 
 
                                     <div class="table-responsive">
-                                    <form action="{{ route ('country.store') }} " method="POST">
+                                    <form action="{{ route ('country.store') }} " method="POST" enctype="multipart/form-data">
                                         {{ csrf_field() }}
 
                                         <table width="98%">
@@ -130,16 +132,16 @@
                                                         <tr>
                                                             <td width="15%">
 
-                                                                <img src="../../GHT/image/logo.png"
-                                                                     style="width:204px;height:120px;">
+                                                              {{--<img class="preview_image" width="100%" id="output"/>--}}
+                                                                <img src="" height="200" alt="Image preview...">
 
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td height="40%">
                                                         <tr>
-                                                            <td><input type="file" name="IMAGE_PATH"
-                                                                       id="flag"></td>
+                                                            <td><input type="file" name="flag" accept="image/"
+                                                                       id="flag" onchange="previewFile()" required></td>
                                                         </tr>
                                                         </td>
                                                         </tr>
@@ -221,7 +223,7 @@
                                                         <td><?php echo $country->continent ?></td>
                                                         <td><?php echo $country->currency_name ?></td>
                                                         <td><?php echo $country->symbol ?></td>
-                                                        <td><?php echo $country->flag ?></td>
+                                                        <td><img src="{{ asset('img/flag/')}}/{{ $country->flag }}"></td>
                                                         <td><?php echo $country->remarks ?></td>
                                                         <td>
                                                             <form class="" method="POST"

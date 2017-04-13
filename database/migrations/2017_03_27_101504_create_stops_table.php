@@ -17,6 +17,8 @@ class CreateStopsTable extends Migration
             $table->increments('id');
             $table->integer('sr_id')-> unsigned();
             $table->foreign('sr_id')-> references('id')-> on ('setup_route');
+            $table->integer('sl_id')->unsigned();
+            $table->foreign('sl_id')->references('id')-> on ('setup_location');
             $table->integer('days')->nullable();
             $table->integer('Stop_no')->nullable();
             $table->float('latitude')->nullable();

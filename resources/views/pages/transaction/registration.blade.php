@@ -1,13 +1,7 @@
 
-<script>
-    function generateQRCode(){
-        this.qrImage.style.display ='none';
-        this.qrImage.src="https://chart.googleapis.com/chart?cht=qr&choe=UTF-8&chs=150x150&chl="
-            +encodeURIComponent(QRCode.value.trim());
-        this.qrImage.style.display ='inline';
-    }
-</script>
 <BODY>
+@include('layouts.qr')
+@include('layouts.image')
 @include('layouts.app')
 <div class="container-fluid">
     <div class="row">
@@ -40,9 +34,12 @@
                                                 <div class="panel panel-default">
 
                                                     <div class="table-responsive">
-                                                        <form action="{{ route ('registration.store') }} " method="POST">
+                                                        <form action="{{ route ('registration.store') }} " method="POST" enctype="multipart/form-data">
                                                             {{ csrf_field() }}
                                                         <table width="98%">
+                                                            <div class="panel panel-default">
+
+
 
                                                             <tr height="40">
                                                                 <td width="28%"
@@ -62,17 +59,20 @@
 
                                                                             </td>
 
-                                                                            <td align="right">Country</td>
+                                                                            <td width="02%">&nbsp;</td>
+                                                                            <td align="right">Country name</td>
                                                                             <td align="center">:</td>
                                                                             <td width="40%">
-                                                                                <SELECT
-                                                                                        class="form-control" name="country_name">
-                                                                                    <OPTION VALUE="Nepal">Nepal</OPTION>
-                                                                                    <OPTION VALUE="China">China</OPTION>
-                                                                                    <OPTION VALUE="Srilanka">Srilanka</OPTION>
-                                                                                    <OPTION VALUE="Bhutan">Bhutan</OPTION>
-                                                                                </SELECT></td>
+                                                                                <SELECT class="form-control" name="country_id"
+                                                                                        value="">
+                                                                                    <?php foreach  ($country as $country) { ?>
+                                                                                    <OPTION VALUE="{{ $country->id }}" name="country_id"><?php echo $country->country_name ?>
+                                                                                    </OPTION>
+                                                                                    <?php } ?>
 
+                                                                                </SELECT>
+
+                                                                            </td>
 
                                                                         </tr>
                                                                         </td>
@@ -90,6 +90,29 @@
                                                                            placeholder="Enter Name "
                                                                            required></td>
                                                             </tr>
+                                                                <tr height="40">
+                                                                    <td align="right">User Image</td>
+                                                                    <td align="center">:</td>
+                                                                    <td>
+                                                                        <table width="100%">
+                                                                            <tr>
+                                                                                <td width="15%">
+
+                                                                                    <img src="" height="150" alt="Image preview...">
+
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td height="40%">
+                                                                            <tr>
+                                                                                <td><input type="file" name="image" accept="image/"
+                                                                                           id="image" onchange="previewFile()" required></td>
+                                                                            </tr>
+                                                                            </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </td>
+                                                                </tr>
 
                                                             <tr height="1">
                                                                 <td align="right">&nbsp;</td>
@@ -306,25 +329,19 @@
 
                                             <div class="col-md-2">
 
-                                                <div class="panel panel-default">
 
                                                     <!-- /.panel-heading -->
-                                                    <input type="button" value="Make QR Code" onclick="javascript:generateQRCode();">
-                                                    <br>
+
 
 
                                                     <div><img id='qrImage' style='display:inline;'
-                                                              src='https://chart.googleapis.com/chart?cht=qr&choe=UTF-8&chs=200x200&chl=http%3A%2F%2Fofficetricks.com'/></div>
+                                                              src='https://chart.googleapis.com/chart?cht=qr&choe=UTF-8&chs=200x200&chl=http%3A%2F%2Fofficetricks.com'/>
+                                                        <input  type="button" value="Make QR Code" onclick="javascript:generateQRCode();">
+                                                        </div>
                                                 </div>
 
-                                                <div class="panel panel-default">
-
-                                                    <!-- /.panel-heading -->
 
 
-                                                    <div><img src="../../GHT/image/pp.jpg" style="width:100%;height:30%;"></div>
-                                                </div>
-                                            </div>
                                         </div>
 
 
@@ -357,6 +374,7 @@
                                             <td><?php echo $user_registration->mobile_no ?></td>
                                             <td><?php echo $user_registration->email_1?></td>
                                             <td><?php echo $user_registration->email_2 ?></td>
+
                                             <td>
                                                 <form class="" method="POST"
                                                       action="{{ route('registration.destroy', $user_registration->id) }}">
@@ -401,6 +419,7 @@
                                                             <th>Passport</th>
                                                             <th>Issue Date</th>
                                                             <th>Expiry Date</th>
+                                                            <th>Image</th>
                                                             <th>&nbsp;</th>
                                                         </tr>
                                                         </thead>
@@ -410,12 +429,13 @@
                                                         <tr>
                                                             <td><?php echo $user_registration->id ?></td>
                                                             <td><?php echo $user_registration->user_name ?></td>
-                                                            <td><?php echo $user_registration->country_name ?></td>
+                                                            <td><?php echo $user_registration->country_id ?></td>
                                                             <td><?php echo $user_registration->mobile_no ?></td>
                                                             <td><?php echo $user_registration->email_1?></td>
                                                             <td><?php echo $user_registration->passport_no ?></td>
                                                             <td><?php echo $user_registration->issue_date ?></td>
                                                             <td><?php echo $user_registration->expiry_date ?></td>
+                                                            <td><img src="{{ asset('img/image/')}}/{{ $user_registration->image }}"></td>
                                                             <td>
                                                                 <form class="" method="POST"
                                                                       action="{{ route('registration.destroy', $user_registration->id) }}">

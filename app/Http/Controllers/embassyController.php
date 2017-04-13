@@ -43,8 +43,6 @@ class embassyController extends Controller
     {
         //create new data
         $embassy = new embassy;
-        //$embassy=$country = country::all()->country_name;
-        //$embassy ->country()->associate($country);
         $embassy ->country_id =$request->country_id;
         $embassy ->location =$request->location;
         $embassy ->contact_person =$request->contact_person;
@@ -91,6 +89,7 @@ class embassyController extends Controller
 
 
         $embassy = Embassy:: findOrFail($id);
+        $embassy ->country_id =$request->country_id;
         $embassy ->location =$request->location;
         $embassy ->contact_person =$request->contact_person;
         $embassy ->position =$request->position;

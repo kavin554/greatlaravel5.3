@@ -10,6 +10,7 @@ use App\Routes;
 use App\routeiteneraries;
 use App\Stops;
 use Illuminate\Routing\Route;
+use App\location;
 
 class RoutesController extends Controller
 {
@@ -21,9 +22,10 @@ class RoutesController extends Controller
     public function index()
     {
         $routes = Routes::all();
-        $route_iteneraries =routeiteneraries::all();
+        $route_itineraries =routeiteneraries::all();
         $stops =Stops::all();
-        return View('pages.generalsetup.route')->with('Routes', $routes)->with('routeiteneraries', $route_iteneraries)->with('Stops', $stops);
+        $setup_location =location::all();
+        return View('pages.generalsetup.route')->with('Routes', $routes)->with('routeiteneraries', $route_itineraries)->with('Stops', $stops)->with('location', $setup_location);
 
 
     }

@@ -15,7 +15,6 @@ class CreateIncidentTypeTable extends Migration
     {
         Schema::create('incident_type', function (Blueprint $table) {
             $table->increments('id')->nullable();
-            $table->string('incident_id')->nullable();
             $table->string('incident_name')->nullable();
             $table->string('type')->nullable();
             $table->string('image')->nullable();

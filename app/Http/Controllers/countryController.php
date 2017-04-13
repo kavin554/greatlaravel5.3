@@ -8,6 +8,9 @@ use App\Http\Requests;
 
 use App\country;
 
+Use Image;
+//use Input;
+
 class countryController extends Controller
 {
     /**
@@ -46,7 +49,15 @@ class countryController extends Controller
         $country ->continent =$request->continent;
         $country ->currency_name =$request->currency_name;
         $country ->symbol =$request->symbol;
-        $country ->flag =$request->flag;
+
+        if($request->hasFile('flag')){
+        $flag = $request ->file('flag');
+        $filename = time() . '.' . $flag->getClientOriginalExtension();
+        $location = public_path('img/flag/' . $filename);
+        Image::make($flag)->resize(140, 140)->save($location);
+        $country->flag = $filename;
+        }
+
         $country ->remarks =$request->remarks;
         $country->save();
         return redirect()->route('country.index');
@@ -93,7 +104,15 @@ class countryController extends Controller
         $country ->continent =$request->continent;
         $country ->currency_name =$request->currency_name;
         $country ->symbol =$request->symbol;
-        $country ->flag =$request->flag;
+
+        if($request->hasFile('flag')){
+            $flag = $request ->file('flag');
+            $filename = time() . '.' . $flag->getClientOriginalExtension();
+            $location = public_path('img/flag/' . $filename);
+            Image::make($flag)->resize(140, 140)->save($location);
+            $country->flag = $filename;
+        }
+
         $country ->remarks =$request->remarks;
         $country->save();
         return redirect()->route ('country.index');

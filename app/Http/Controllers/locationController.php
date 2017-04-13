@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 use App\location;
+use App\place;
 
 class locationController extends Controller
 {
@@ -18,7 +19,9 @@ class locationController extends Controller
     public function index()
     {
         $setup_location =location::all();
-        return view('pages.generalsetup.location', ['setup_locations' => $setup_location]);
+        $place_type =place::all();
+
+        return view('pages.generalsetup.location')->with( 'setup_locations' , $setup_location)->with('place', $place_type);
     }
 
     /**
@@ -41,7 +44,6 @@ class locationController extends Controller
     {
         //create new data
         $setup_location = new location;
-        $setup_location ->sl_id =$request->sl_id;
         $setup_location ->pl_id =$request->pl_id;
         $setup_location ->name =$request->name;
         $setup_location ->latitude =$request->latitude;
@@ -87,7 +89,6 @@ class locationController extends Controller
     {
 
         $setup_location = location:: findOrFail($id);
-        $setup_location ->sl_id =$request->sl_id;
         $setup_location ->pl_id =$request->pl_id;
         $setup_location ->name =$request->name;
         $setup_location ->latitude =$request->latitude;

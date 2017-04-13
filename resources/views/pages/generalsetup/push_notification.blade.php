@@ -40,13 +40,24 @@
                                                         <tr>
                                                             <td width="30%">
                                                                 <input class="form-control" type="hidden">
-
+                                                            </td>
 
                                                             <td align="right">&nbsp;</td>
 
+
+                                                            <td width="02%">&nbsp;</td>
+                                                            <td align="right">Route Name</td>
+                                                            <td align="center">:</td>
+                                                            <td width="40%">
+                                                                <SELECT class="form-control" name="sr_id"
+                                                                        value="">
+                                                                    <?php foreach  ($Routes as $routes) { ?>
+                                                                    <OPTION value="{{ $routes->id }}" name="sr_id"><?php echo $routes->sr_name ?>
+                                                                    </OPTION>
+                                                                    <?php } ?>
+
+                                                                </SELECT>
                                                             </td>
-
-
 
 
                                                         </tr>

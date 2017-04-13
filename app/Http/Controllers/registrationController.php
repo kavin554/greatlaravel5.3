@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 use App\registration;
-
+use App\country;
+use Image;
 
 class registrationController extends Controller
 {
@@ -19,7 +20,8 @@ class registrationController extends Controller
     public function index()
     {
         $user_registration =registration::all();
-        return view('pages.transaction.registration', ['user_registrations' => $user_registration]);
+        $country = country::all();
+        return view('pages.transaction.registration')->with('user_registrations', $user_registration)->with('country',$country);
     }
 
     /**
@@ -43,7 +45,14 @@ class registrationController extends Controller
         //create new data
         $user_registration = new registration;
         $user_registration ->user_name =$request->user_name;
-        $user_registration ->country_name =$request->country_name;
+        $user_registration ->country_id =$request->country_id;
+        if($request->hasFile('image')){
+            $image = $request ->file('image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $location = public_path('img/image/' . $filename);
+            Image::make($image)->resize(140, 140)->save($location);
+            $user_registration->image = $filename;
+        }
         $user_registration ->street =$request->street;
         $user_registration ->city =$request->city;
         $user_registration ->state =$request->state;
@@ -104,7 +113,15 @@ class registrationController extends Controller
     {
         $user_registration = registration:: findOrFail($id);
         $user_registration ->user_name =$request->user_name;
-        $user_registration ->country_name =$request->country_name;
+        $user_registration ->country_id =$request->country_id;
+
+        if($request->hasFile('image')){
+            $image = $request ->file('image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $location = public_path('img/image/' . $filename);
+            Image::make($image)->resize(140, 140)->save($location);
+            $user_registration->image = $filename;
+        }
         $user_registration ->street =$request->street;
         $user_registration ->city =$request->city;
         $user_registration ->state =$request->state;

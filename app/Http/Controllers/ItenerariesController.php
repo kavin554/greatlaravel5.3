@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\routeiteneraries;
 use App\Routes;
 use App\Stops;
+use App\location;
 use App\Http\Requests;
 
 class ItenerariesController extends Controller
@@ -20,7 +21,8 @@ class ItenerariesController extends Controller
         $routes = Routes::all();
         $route_iteneraries =routeiteneraries::all();
         $stops =Stops::all();
-        return View('pages.generalsetup.route')->with('Routes', $routes)->with('routeiteneraries', $route_iteneraries)->with('Stops', $stops);
+        $setup_location =location::all();
+        return View('pages.generalsetup.route')->with('Routes', $routes)->with('routeiteneraries', $route_iteneraries)->with('Stops', $stops)->with('location', $setup_location);
     }
 
     /**
@@ -44,6 +46,7 @@ class ItenerariesController extends Controller
         //create new data
         $route_iteneraries = new routeiteneraries;
         $route_iteneraries ->day =$request->day;
+        $route_iteneraries ->sr_id =$request->sr_id;
         $route_iteneraries ->start =$request->start_date;
         $route_iteneraries ->end =$request->end_date;
         $route_iteneraries ->duration_hour =$request->duration;
@@ -88,6 +91,7 @@ class ItenerariesController extends Controller
         //update data
         $route_iteneraries = routeiteneraries:: findOrFail($id);
         $route_iteneraries ->day =$request->day;
+        $route_iteneraries ->sr_id =$request->sr_id;
         $route_iteneraries ->start =$request->start_date;
         $route_iteneraries ->end =$request->end_date;
         $route_iteneraries ->duration_hour =$request->duration;

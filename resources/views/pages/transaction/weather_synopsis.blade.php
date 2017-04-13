@@ -57,15 +57,21 @@
                                                                                            type="hidden">
 
 
-                                                                                <td align="right">&nbsp;</td>
+                                                                                </td>
+                                                                                <td width="02%">&nbsp;</td>
+                                                                                <td align="right">Weather name</td>
+                                                                                <td align="center">:</td>
+                                                                                <td width="40%">
+                                                                                    <SELECT class="form-control" name="wd_id"
+                                                                                            value="">
+                                                                                        <?php foreach  ($weather as $weather_data) { ?>
+                                                                                        <OPTION VALUE="{{ $weather_data->id }}" name="wd_id"><?php echo $weather_data->sl_id ?>
+                                                                                        </OPTION>
+                                                                                        <?php } ?>
+
+                                                                                    </SELECT>
 
                                                                                 </td>
-
-
-
-
-                                                                            </tr>
-                                                                            </td>
                                                                             </tr>
                                                                         </table>
                                                                     </td>

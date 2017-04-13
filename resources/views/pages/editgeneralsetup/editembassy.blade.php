@@ -40,14 +40,40 @@
                                         </td>
                                     </tr>
 
+                                     <tr height="40">
+                                                    <td width="28%" align="right"> Location</td>
+                                                    <td width="02%" align="center">:</td>
+                                                    <td width="88%">
+                                                        <table width="100%">
+                                                            <tr>
+                                                                <td width="40%">
+                                                                    <input type="text" class="form-control" id="NAME"
+                                                                           name="location" value="{{$embassy->location}}"
+                                                                           placeholder="Location">
 
-                                    <tr height="40">
-                                        <td width="28%" align="right">Location</td>
-                                        <td width="02%" align="center">:</td>
-                                        <td><input type="text" class="form-control" id="NAME"
-                                                   name="location" value="{{$embassy->location}}"
-                                                   placeholder="Location">
-                                    </tr>
+                                                                </td>
+                                                                <td width="02%">&nbsp;</td>
+                                                                <td align="right">Country name</td>
+                                                                <td align="center">:</td>
+                                                                <td width="40%">
+                                                                    <SELECT class="form-control" name="country_id"
+                                                                            value="">
+                                                                        <?php foreach  ($country as $country) { ?>
+                                                                        <OPTION VALUE="{{ $country->id }}" name="country_id"><?php echo $country->country_name ?>
+                                                                        </OPTION>
+                                                                        <?php } ?>
+
+                                                                    </SELECT>
+
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+
+
+
+                                    
 
                                     <tr height="40">
                                         <td width="28%" align="right">Contact Person</td>

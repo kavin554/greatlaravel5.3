@@ -71,7 +71,7 @@
                                                                     <SELECT class="form-control" name="country_id"
                                                                             value="">
                                                                         <?php foreach  ($country as $country) { ?>
-                                                                        <OPTION VALUE="" name="country_id"><?php echo $country->country_name ?>
+                                                                        <OPTION VALUE="{{ $country->id }}" name="country_id"><?php echo $country->country_name ?>
                                                                         </OPTION>
                                                                         <?php } ?>
 

@@ -11,6 +11,10 @@ class country extends Model
         return $this ->hasOne('App\embassy');
     }
 
+    public function registration(){
+        return $this ->hasMany('App\registration');
+    }
+
 
 }
 

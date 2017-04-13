@@ -8,6 +8,8 @@ use App\Http\Requests;
 
 use App\incident;
 
+Use Image;
+
 class incidentController extends Controller
 {
     /**
@@ -43,7 +45,15 @@ class incidentController extends Controller
         $incident_type = new incident;
         $incident_type ->incident_name =$request->incident_name;
         $incident_type ->type =$request->type;
-        $incident_type ->image =$request->image;
+
+        if($request->hasFile('incident')){
+        $incident = $request ->file('incident');
+        $filename = time() . '.' . $incident->getClientOriginalExtension();
+        $location = public_path('img/incident/' . $filename);
+        Image::make($incident)->resize(140, 140)->save($location);
+        $incident_type->image = $filename;
+        }
+
         $incident_type ->remarks =$request->remarks;
         $incident_type->save();
         return redirect()->route('incident.index');
@@ -85,7 +95,15 @@ class incidentController extends Controller
         $incident_type = incident:: findOrFail($id);
         $incident_type ->incident_name =$request->incident_name;
         $incident_type ->type =$request->type;
-        $incident_type ->image =$request->image;
+
+        if($request->hasFile('incident')){
+        $incident = $request ->file('incident');
+        $filename = time() . '.' . $incident->getClientOriginalExtension();
+        $location = public_path('img/incident/' . $filename);
+        Image::make($incident)->resize(140, 140)->save($location);
+        $incident_type->image = $filename;
+        }
+
         $incident_type ->remarks =$request->remarks;
         $incident_type->save();
         return redirect()->route('incident.index');

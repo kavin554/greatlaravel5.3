@@ -8,7 +8,7 @@ use App\Http\Requests;
 
 use App\place;
 
-
+use Image;
 
 class placeController extends Controller
 {
@@ -43,10 +43,16 @@ class placeController extends Controller
     {
         //create new data
         $place_type = new place;
-        $place_type ->pl_id =$request->pl_id;
-        $place_type ->sl_id =$request->sl_id;
         $place_type ->name =$request->name;
-        $place_type ->image =$request->image;
+        
+        if($request->hasFile('place')){
+        $place = $request ->file('place');
+        $filename = time() . '.' . $place->getClientOriginalExtension();
+        $location = public_path('img/place/' . $filename);
+        Image::make($place)->resize(140, 140)->save($location);
+        $place_type->image = $filename;
+        }
+
         $place_type ->status_flag =$request->status_flag;
         $place_type ->remarks =$request->remarks;
         $place_type->save();
@@ -86,10 +92,16 @@ class placeController extends Controller
     public function update(Request $request, $id)
     {
         $place_type = place:: findOrFail($id);
-        $place_type ->pl_id =$request->pl_id;
-        $place_type ->sl_id =$request->sl_id;
         $place_type ->name =$request->name;
-        $place_type ->image =$request->image;
+
+        if($request->hasFile('place')){
+        $place = $request ->file('place');
+        $filename = time() . '.' . $place->getClientOriginalExtension();
+        $location = public_path('img/place/' . $filename);
+        Image::make($place)->resize(140, 140)->save($location);
+        $place_type->image = $filename;
+        }
+
         $place_type ->status_flag =$request->status_flag;
         $place_type ->remarks =$request->remarks;
         $place_type->save();
