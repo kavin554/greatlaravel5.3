@@ -2,6 +2,7 @@
 
 <BODY>
 @include('layouts.app')
+@include('layouts.image')
 <div class="container-fluid">
     <div class="row">
 
@@ -9,7 +10,6 @@
             <div class="panel panel-default">
                 <div class="panel-body">
 
-                    <div>
 
                         <ul class="nav nav-tabs" role="tablist">
 
@@ -18,8 +18,10 @@
                             <li role="presentation"><a href="#list" aria-controls="home" role="tab"
                                                        data-toggle="tab"> Route Detail List </a></li>
 
+                            <li role="presentation"><a href="#photo" aria-controls="home" role="tab"
+                                                       data-toggle="tab"> Route Photo</a></li>
                             <li role="presentation"><a href="#itetaries" aria-controls="home" role="tab"
-                                                       data-toggle="tab"> Route Iteneraries</a></li>
+                                                       data-toggle="tab"> Route Itineraries</a></li>
                             <li role="presentation"><a href="#stops" aria-controls="home" role="tab"
                                                        data-toggle="tab"> Stops Setup</a></li>
 
@@ -295,16 +297,109 @@
                                 </div>
                             </div>
 
+                            <div role="tabpanel" class="tab-pane" id="photo">
+                                <div class="container" style="padding:5px;width:100%">
+
+                                    <!-- /.list-group -->
+
+                                    <div class="list-group">
+                                        <form action="{{ route('photo.store') }}" method="post" >
+                                            {{ csrf_field() }}
+                                            <table width="100%" class="table table-striped" border="0">
+
+                                                <thead>
+                                                <tr>
+                                                    <th>Id</th>
+                                                    <th>Route Name </th>
+                                                    <th>Image</th>
+                                                    <th>Description</th>
+                                                    <th>Remarks</th>
+                                                    <th>Action</th>
+
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td width="5%"> </td>
+                                                    <td width="15%">
+                                                        <SELECT class="form-control" name="sr_id">
+                                                            <?php foreach  ($Routes as $routes) { ?>
+                                                            <OPTION value="{{ $routes->id }}" name="sr_id"><?php echo $routes->sr_name ?>
+                                                            </OPTION>
+                                                            <?php } ?>
+
+                                                        </SELECT>
+                                                    </td>
+
+                                                    <td width="15%">
+                                                    <img src="" height="200" alt="Image preview..."><input type="file" name="rp_image" accept="image/"
+                                                               id="place" onchange="previewFile()" required>
+
+                                                    </td>
+                                                    <td width="20%">
+                                                        <input name="rp_image_desc" class="form-control" placeholder="Description"
+                                                               id="Description">
+                                                    </td>
+                                                    <td width="15%">
+                                                        <input name="remarks" class="form-control"
+                                                               placeholder="Remarks" id="Remarks">
+                                                    </td>
+
+                                                    <td width="10%">
+                                                        <input type="submit" value="save" class="btn btn-success">
+                                                    </td>
+
+
+
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                @foreach($Photo as $photo)
+                                                <tr>
+                                                    <td>{{ $photo->id }}</td>
+                                                    <td>{{ $photo->sr_id  }}</td>
+                                                    <td>{{ $photo->rp_image }}</td>
+                                                    <td>{{ $photo->rp_image_desc  }}</td>
+                                                    <td>{{ $photo->remarks  }}</td>
+                                                    <td>
+                                                        <form class="" method="POST"
+                                                              action="{{ route('photo.destroy', $photo->id) }}">
+                                                            <input type="hidden" name="_token"
+                                                                   value="{{csrf_token()}}">
+                                                            <input type="hidden" name="_method" value="delete"/>
+                                                            <a href="{{ route('photo.edit', $photo->id) }}"
+                                                               class="btn btn-primary">Edit</a>
+                                                            <input type="submit" class="btn btn-danger"
+                                                                   onclick="return confirm('Confirm to Delete');"
+                                                                   name="name " value="Delete">
+                                                        </form>
+                                                    </td>
+
+                                                </tr>
+                                                @endforeach
+                                                </tbody>
+                                            </table>
+                                        </form>
+
+                                    </div>
+
+                                    <!-- /.panel-body -->
+
+                                    <!-- /.panel -->
+
+
+
+
+                                </div>
+                            </div>
 
 
                             <div role="tabpanel" class="tab-pane" id="itetaries">
                                 <div class="container" style="padding:5px;width:100%">
-                                    <div class="panel panel-default">
 
                                         <!-- /.list-group -->
-                                        <div class="panel-body">
+
                                             <div class="list-group">
-                                                <div class="list-group">
                                                     <form action="{{ route('iteneraries.store') }}" method="post" >
                                                         {{ csrf_field() }}
                                                     <table width="100%" class="table table-striped" border="0">
@@ -401,14 +496,14 @@
                                                         </tbody>
                                                     </table>
                                                     </form>
-                                                </div>
+
                                             </div>
-                                        </div>
+
                                         <!-- /.panel-body -->
 
                                         <!-- /.panel -->
 
-                                    </div>
+
 
 
                                 </div>
@@ -616,7 +711,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+
                 </div>
             </div>
         </div>

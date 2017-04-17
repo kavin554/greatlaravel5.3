@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\routeiteneraries;
 use App\Routes;
 use App\Stops;
+use App\photo;
 use App\location;
 use App\Http\Requests;
 
@@ -20,9 +21,10 @@ class ItenerariesController extends Controller
     {
         $routes = Routes::all();
         $route_iteneraries =routeiteneraries::all();
+        $photo =Photo::all();
         $stops =Stops::all();
         $setup_location =location::all();
-        return View('pages.generalsetup.route')->with('Routes', $routes)->with('routeiteneraries', $route_iteneraries)->with('Stops', $stops)->with('location', $setup_location);
+        return View('pages.generalsetup.route')->with('Photo', $photo)->with('Routes', $routes)->with('routeiteneraries', $route_iteneraries)->with('Stops', $stops)->with('location', $setup_location);
     }
 
     /**

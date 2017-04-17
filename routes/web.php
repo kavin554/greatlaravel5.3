@@ -62,6 +62,12 @@ Route::group(['middleware' => ['web']], function()
     Route::resource('iteneraries','ItenerariesController');
 });
 
+// Routes for Photo
+Route::group(['middleware' => ['web']], function()
+{
+    Route::resource('photo','PhotoController');
+});
+
 // Routes for stops
 Route::group(['middleware' => ['web']], function()
 {

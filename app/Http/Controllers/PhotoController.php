@@ -4,13 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Routes;
-use App\Stops;
 use App\photo;
 use App\location;
 use App\routeiteneraries;
-use App\Http\Requests;
-
-class StopsController extends Controller
+use App\Stops;
+class PhotoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,6 +24,7 @@ class StopsController extends Controller
         $setup_location =location::all();
         return View('pages.generalsetup.route')->with('Photo', $photo)->with('Routes', $routes)->with('routeiteneraries', $route_iteneraries)->with('Stops', $stops)->with('location', $setup_location);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -45,18 +44,13 @@ class StopsController extends Controller
      */
     public function store(Request $request)
     {
-        //create new data
-        $stops = new Stops;
-        $stops ->days =$request->days;
-        $stops ->sr_id =$request->sr_id;
-        $stops ->sl_id =$request->sl_id;
-        $stops ->Stop_no =$request->stops;
-        $stops ->latitude =$request->latitude;
-        $stops ->longitude =$request->longitude;
-        $stops ->altitude =$request->altitude;
-        $stops ->remarks =$request->remarks;
-        $stops->save();
-        return redirect()->route('iteneraries.index');
+        $photo = new photo;
+        $photo ->sr_id =$request->sr_id;
+        $photo ->rp_image =$request->rp_image;
+        $photo ->rp_image_desc =$request->rp_image_desc;
+        $photo ->remarks =$request->remarks;
+        $photo->save();
+        return redirect()->route('photo.index');
     }
 
     /**
@@ -78,8 +72,8 @@ class StopsController extends Controller
      */
     public function edit($id)
     {
-        $stops = Stops:: findOrFail($id);
-        return view('pages.editgeneralsetup.editstops', compact('stops'));
+        $photo = photo:: findOrFail($id);
+        return view('pages.editgeneralsetup.edititeneraries', compact('photo'));
     }
 
     /**
@@ -91,18 +85,13 @@ class StopsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //update data
-        $stops = Stops:: findOrFail($id);
-        $stops ->days =$request->days;
-        $stops ->sr_id =$request->sr_id;
-        $stops ->sl_id =$request->sl_id;
-        $stops ->Stop_no =$request->stops;
-        $stops ->latitude =$request->latitude;
-        $stops ->longitude =$request->longitude;
-        $stops ->altitude =$request->altitude;
-        $stops ->remarks =$request->remarks;
-        $stops->save();
-        return redirect()->route('routes.index');
+        $photo = photo:: findOrFail($id);
+        $photo ->sr_id =$request->sr_id;
+        $photo ->rp_image =$request->rp_image;
+        $photo ->rp_image_desc =$request->rp_image_desc;
+        $photo ->remarks =$request->remarks;
+        $photo->save();
+        return redirect()->route('photo.index');
     }
 
     /**
@@ -113,8 +102,8 @@ class StopsController extends Controller
      */
     public function destroy($id)
     {
-        $stops = Stops::findOrFail($id);
-        $stops->delete();
-        return redirect()->route('stops.index');
+        $photo = photo::findOrFail($id);
+        $photo->delete();
+        return redirect()->route('photo.index');
     }
 }

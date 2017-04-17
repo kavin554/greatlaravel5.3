@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\Routes;
 use App\routeiteneraries;
 use App\Stops;
+use App\photo;
 use Illuminate\Routing\Route;
 use App\location;
 
@@ -22,12 +23,11 @@ class RoutesController extends Controller
     public function index()
     {
         $routes = Routes::all();
-        $route_itineraries =routeiteneraries::all();
+        $route_iteneraries =routeiteneraries::all();
+        $photo =Photo::all();
         $stops =Stops::all();
         $setup_location =location::all();
-        return View('pages.generalsetup.route')->with('Routes', $routes)->with('routeiteneraries', $route_itineraries)->with('Stops', $stops)->with('location', $setup_location);
-
-
+        return View('pages.generalsetup.route')->with('Photo', $photo)->with('Routes', $routes)->with('routeiteneraries', $route_iteneraries)->with('Stops', $stops)->with('location', $setup_location);
     }
 
     /**

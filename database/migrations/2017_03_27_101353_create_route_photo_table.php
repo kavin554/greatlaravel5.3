@@ -17,7 +17,6 @@ class CreateRoutePhotoTable extends Migration
             $table->increments('id');
             $table->integer('sr_id')-> unsigned();
             //$table->foreign('sr_id')-> references('id')-> on ('setup_route');
-            $table->string('rp_default')->nullable();
             $table->string('rp_image')->nullable();
             $table->string('rp_image_desc')->nullable();
             $table->string('remarks')->nullable();
